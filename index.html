@@ -188,7 +188,7 @@ textarea.field{width:100%;min-height:100px;padding:12px 14px;border-radius:12px;
 .qty button{width:34px;height:34px;background:var(--card);border:0}
 .qty span{min-width:28px;text-align:center;font-weight:700}
 
-/* ---------- Timeline (Innsjekk) ---------- */
+/* ---------- Timeline (reise-tidslinje) ---------- */
 .timeline{position:relative;margin:20px 0;padding-left:28px}
 .timeline::before{content:"";position:absolute;left:11px;top:6px;bottom:6px;width:2px;background:var(--line)}
 .step{position:relative;padding:6px 0 22px 8px}
@@ -261,16 +261,16 @@ textarea.field{width:100%;min-height:100px;padding:12px 14px;border-radius:12px;
       <p class="sub" data-i18n="hero.sub">Vi gleder oss til å ta imot deg</p>
 
       <div class="stay-meta">
-        <div><span data-i18n="hero.checkin">Innsjekk</span><strong>Fre 10. juli · 15:00</strong></div>
-        <div><span data-i18n="hero.checkout">Utsjekk</span><strong>Søn 12. juli · 11:00</strong></div>
+        <div><span data-i18n="hero.checkin">Ankomst</span><strong>Fre 10. juli · 15:00</strong></div>
+        <div><span data-i18n="hero.checkout">Avreise</span><strong>Søn 12. juli · 11:00</strong></div>
         <div><span data-i18n="hero.room">Bolig</span><strong>Sjøhus 4 · Havutsikt</strong></div>
         <div><span data-i18n="hero.guests">Gjester</span><strong>2 voksne · 1 barn</strong></div>
         <div><span data-i18n="hero.ref">Bookingref</span><strong>MRV-2726315</strong></div>
       </div>
 
       <div class="hero-actions">
-        <button class="btn" onclick="go('innsjekk')">Fullfør innsjekk →</button>
-        <button class="btn ghost" onclick="go('nokkel')">Åpne digital nøkkel</button>
+        <button class="btn" onclick="go('nokkel')">Åpne digital nøkkel</button>
+        <button class="btn ghost" onclick="go('info')">Praktisk info</button>
       </div>
     </div>
   </section>
@@ -278,7 +278,6 @@ textarea.field{width:100%;min-height:100px;padding:12px 14px;border-radius:12px;
   <!-- ============ TABS ============ -->
   <nav class="tabs" id="tabs">
     <button class="tab active" data-tab="hjem" onclick="go('hjem')">🏡 Hjem</button>
-    <button class="tab" data-tab="innsjekk" onclick="go('innsjekk')">🎫 Innsjekk</button>
     <button class="tab" data-tab="nokkel" onclick="go('nokkel')">🔑 Digital nøkkel</button>
     <button class="tab" data-tab="opphold" onclick="go('opphold')">🛏️ Ditt opphold</button>
     <button class="tab" data-tab="opplevelser" onclick="go('opplevelser')">🌲 Opplevelser</button>
@@ -304,10 +303,10 @@ textarea.field{width:100%;min-height:100px;padding:12px 14px;border-radius:12px;
         </p>
 
         <div class="quick-grid" style="margin-top:18px">
-          <button class="quick" onclick="go('innsjekk')">
-            <div class="ico">🎫</div>
-            <h4>Innsjekk</h4>
-            <p>Fullfør innsjekk før du ankommer – hopp over resepsjonen.</p>
+          <button class="quick" onclick="openSubInfo2('ankomst')">
+            <div class="ico">🚗</div>
+            <h4>Ankomst</h4>
+            <p>Veibeskrivelse, kart og parkering.</p>
           </button>
           <button class="quick" onclick="go('nokkel')">
             <div class="ico">🔑</div>
@@ -398,8 +397,7 @@ textarea.field{width:100%;min-height:100px;padding:12px 14px;border-radius:12px;
             <div class="timeline">
               <div class="step done"><h4>Booking bekreftet</h4><p>13. juni – kvittering sendt</p></div>
               <div class="step done"><h4>Digital velkomst sendt</h4><p>3 dager før ankomst</p></div>
-              <div class="step now"><h4>Fullfør innsjekk</h4><p>Legitimasjon + digital signering</p></div>
-              <div class="step"><h4>Digital nøkkel aktiveres</h4><p>Fre 10. juli kl 14:00</p></div>
+              <div class="step now"><h4>Digital nøkkel aktiveres</h4><p>Fre 10. juli kl 14:00 – gå rett til boligen</p></div>
               <div class="step"><h4>Utsjekk</h4><p>Søn 12. juli kl 11:00 – ingen resepsjon</p></div>
               <div class="step"><h4>Tilbakemelding</h4><p>Kort spørsmål etter opphold</p></div>
             </div>
@@ -418,90 +416,12 @@ textarea.field{width:100%;min-height:100px;padding:12px 14px;border-radius:12px;
   </section>
 
   <!-- ================================================================
-       SECTION: INNSJEKK
-  ================================================================= -->
-  <section class="section" id="sec-innsjekk">
-    <h2>Digital innsjekk</h2>
-    <p style="color:var(--muted);max-width:70ch">
-      Fullfør innsjekk før du ankommer – da kan du gå rett til boligen din og hoppe over resepsjonen.
-      Vi trenger et par opplysninger og en digital signatur på husreglene.
-    </p>
-
-    <div class="two-col" style="margin-top:12px">
-      <div class="stack">
-        <div class="card"><div class="pad">
-          <h3 style="margin-top:0">1. Gjesteopplysninger</h3>
-          <div class="grid" style="grid-template-columns:1fr 1fr;gap:12px">
-            <label>Fornavn<br><input class="field" style="width:100%;padding:11px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink)" value="Ingrid"></label>
-            <label>Etternavn<br><input class="field" style="width:100%;padding:11px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink)" value="Solheim"></label>
-            <label>E-post<br><input class="field" style="width:100%;padding:11px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink)" value="ingrid@example.com"></label>
-            <label>Telefon<br><input class="field" style="width:100%;padding:11px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink)" value="+47 918 22 222"></label>
-            <label>Land<br><input class="field" style="width:100%;padding:11px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink)" value="Norge"></label>
-            <label>Legitimasjon<br><input type="file" style="width:100%;padding:11px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink)"></label>
-          </div>
-        </div></div>
-
-        <div class="card"><div class="pad">
-          <h3 style="margin-top:0">2. Tidlig innsjekk</h3>
-          <p style="color:var(--muted);margin:0 0 12px">Vi kan tilby innsjekk fra kl 12:00 mot et lite tillegg.</p>
-          <div class="row-between">
-            <div>
-              <strong>Tidlig innsjekk fra 12:00</strong>
-              <div style="color:var(--muted);font-size:13px">Boligen er klargjort tidligere</div>
-            </div>
-            <div style="display:flex;align-items:center;gap:12px">
-              <span class="price" style="color:var(--accent);font-weight:700">+ 350 kr</span>
-              <button class="btn secondary" onclick="this.classList.toggle('gold');this.textContent=this.classList.contains('gold')?'Lagt til ✓':'Legg til'">Legg til</button>
-            </div>
-          </div>
-        </div></div>
-
-        <div class="card"><div class="pad">
-          <h3 style="margin-top:0">3. Husregler & signatur</h3>
-          <ul style="color:var(--muted);padding-left:18px;margin:0 0 14px">
-            <li>Ingen røyking innendørs.</li>
-            <li>Ro fra 23:00 til 07:00.</li>
-            <li>Husdyr etter avtale (allergivennlige boliger tilgjengelig).</li>
-            <li>Rengjøring er inkludert – la boligen ligne den du fant.</li>
-            <li>Skader meldes umiddelbart via meldinger.</li>
-          </ul>
-          <label style="display:flex;gap:10px;align-items:flex-start;font-size:14px">
-            <input type="checkbox" style="margin-top:3px"> Jeg har lest og akseptert husreglene, personvern og bestillingsvilkårene.
-          </label>
-          <div style="margin-top:12px">
-            <button class="btn">Signer og fullfør innsjekk</button>
-          </div>
-        </div></div>
-      </div>
-
-      <aside class="stack">
-        <div class="card"><div class="pad">
-          <h3 style="margin-top:0">Utsjekk</h3>
-          <p style="color:var(--muted);margin:0 0 10px">Utsjekk er automatisk klokken 11:00 søndag. Gå rett ut – nøkkelen deaktiveres.</p>
-          <div class="row-between">
-            <strong>Senere utsjekk til 14:00</strong>
-            <button class="btn ghost">+ 450 kr</button>
-          </div>
-        </div></div>
-
-        <div class="card"><div class="pad">
-          <h3 style="margin-top:0">Ankomst</h3>
-          <p style="color:var(--muted);margin:0 0 8px">Marivold ligger 8 minutter fra E18 – følg skiltingen mot havna.</p>
-          <div class="map"><span class="pin" style="left:52%;top:44%"></span></div>
-          <button class="btn secondary" style="width:100%;margin-top:10px">Åpne i Google Maps</button>
-          <button class="btn secondary" style="width:100%;margin-top:6px">Åpne i Apple Kart</button>
-        </div></div>
-      </aside>
-    </div>
-  </section>
-
-  <!-- ================================================================
        SECTION: DIGITAL NØKKEL
   ================================================================= -->
   <section class="section" id="sec-nokkel">
     <h2>Din digitale nøkkel</h2>
     <p style="color:var(--muted);max-width:70ch">
-      Nøklene aktiveres automatisk fra innsjekk-tidspunkt og deaktiveres ved utsjekk.
+      Nøklene aktiveres automatisk ved ankomst og deaktiveres ved avreise – ingen innsjekk nødvendig.
       Trykk «Åpne dør» innen 3 meter fra låsen.
     </p>
 
@@ -784,6 +704,7 @@ textarea.field{width:100%;min-height:100px;padding:12px 14px;border-radius:12px;
 
     <div class="subnav">
       <button class="active" onclick="openSubInfo('wifi')">📶 WiFi</button>
+      <button onclick="openSubInfo('ankomst')">🚗 Ankomst</button>
       <button onclick="openSubInfo('husregler')">📜 Husregler</button>
       <button onclick="openSubInfo('parkering')">🅿️ Parkering</button>
       <button onclick="openSubInfo('avfall')">♻️ Avfall</button>
@@ -799,6 +720,17 @@ textarea.field{width:100%;min-height:100px;padding:12px 14px;border-radius:12px;
         <div class="row-between" style="padding:8px 0;border-bottom:1px solid var(--line)"><span>Passord</span><strong>havblikk2025</strong></div>
         <div class="row-between" style="padding:8px 0;border-bottom:1px solid var(--line)"><span>Fart</span><strong>500 Mbps ned / 250 opp</strong></div>
         <div class="row-between" style="padding:8px 0"><span>Egen QR-kode</span><button class="btn secondary" onclick="alert('QR-kode vises')">Vis QR</button></div>
+      </div></div>
+    </div>
+
+    <div id="info-ankomst" class="info-sub hidden">
+      <div class="card"><div class="pad">
+        <h3 style="margin-top:0">🚗 Ankomst & veibeskrivelse</h3>
+        <p style="color:var(--muted);margin:0 0 8px">Marivold ligger 8 minutter fra E18 – følg skiltingen mot havna. Boligen er klar fra kl 15:00 på ankomstdagen, og den digitale nøkkelen aktiveres automatisk. Gå rett til boligen – ingen resepsjon eller innsjekk nødvendig.</p>
+        <div class="map"><span class="pin" style="left:52%;top:44%"></span></div>
+        <button class="btn secondary" style="width:100%;margin-top:10px">Åpne i Google Maps</button>
+        <button class="btn secondary" style="width:100%;margin-top:6px">Åpne i Apple Kart</button>
+        <p style="color:var(--muted);font-size:13px;margin-top:12px">Utsjekk er automatisk kl 11:00 på avreisedagen – nøkkelen deaktiveres og du kan gå rett ut.</p>
       </div></div>
     </div>
 
@@ -859,7 +791,7 @@ textarea.field{width:100%;min-height:100px;padding:12px 14px;border-radius:12px;
     </div>
 
     <div id="info-faq" class="info-sub hidden">
-      <details class="faq" open><summary>Hva er innsjekk- og utsjekk-tiden?</summary><p>Innsjekk 15:00, utsjekk 11:00. Tidlig/sen mot lite gebyr – bestill i portalen.</p></details>
+      <details class="faq" open><summary>Når er ankomst- og avreisetiden?</summary><p>Boligen er klar fra 15:00 og forlates innen 11:00. Den digitale nøkkelen styrer alt automatisk – ingen innsjekk nødvendig.</p></details>
       <details class="faq"><summary>Er det tillatt med hund?</summary><p>Ja, i utvalgte boliger. Legg til «Husdyravgift» i Shop for 250 kr.</p></details>
       <details class="faq"><summary>Kan jeg forlenge oppholdet?</summary><p>Ja – forleng direkte fra «Ditt opphold» så lenge det er ledig kapasitet.</p></details>
       <details class="faq"><summary>Har dere ladestasjon for el-bil?</summary><p>Ja, 4 x 22 kW ladere ved parkeringen. Betales med app.</p></details>
@@ -956,7 +888,7 @@ textarea.field{width:100%;min-height:100px;padding:12px 14px;border-radius:12px;
 
       <h3 style="margin-top:22px">Ranger delene av oppholdet</h3>
       <div style="display:grid;grid-template-columns:1fr auto;gap:8px 20px;align-items:center;color:var(--muted);font-size:14px">
-        <span>Innsjekk-opplevelse</span><span>★★★★★</span>
+        <span>Ankomst-opplevelse</span><span>★★★★★</span>
         <span>Renhold</span><span>★★★★★</span>
         <span>Utstyr</span><span>★★★★☆</span>
         <span>Kommunikasjon</span><span>★★★★★</span>
@@ -1017,10 +949,10 @@ function toggleLang(e){
 document.addEventListener('click',()=>document.getElementById('langMenu').classList.add('hidden'));
 
 const i18n = {
-  nb:{'hero.title':'Velkommen til Marivold, Ingrid','hero.sub':'Vi gleder oss til å ta imot deg','hero.checkin':'Innsjekk','hero.checkout':'Utsjekk','hero.room':'Bolig','hero.guests':'Gjester','hero.ref':'Bookingref'},
-  en:{'hero.title':'Welcome to Marivold, Ingrid','hero.sub':"We're looking forward to hosting you",'hero.checkin':'Check-in','hero.checkout':'Check-out','hero.room':'Property','hero.guests':'Guests','hero.ref':'Booking ref'},
-  da:{'hero.title':'Velkommen til Marivold, Ingrid','hero.sub':'Vi glæder os til at byde dig velkommen','hero.checkin':'Indtjekning','hero.checkout':'Udtjekning','hero.room':'Bolig','hero.guests':'Gæster','hero.ref':'Bookingref'},
-  sv:{'hero.title':'Välkommen till Marivold, Ingrid','hero.sub':'Vi ser fram emot att ta emot dig','hero.checkin':'Incheckning','hero.checkout':'Utcheckning','hero.room':'Boende','hero.guests':'Gäster','hero.ref':'Bokningsref'},
+  nb:{'hero.title':'Velkommen til Marivold, Ingrid','hero.sub':'Vi gleder oss til å ta imot deg','hero.checkin':'Ankomst','hero.checkout':'Avreise','hero.room':'Bolig','hero.guests':'Gjester','hero.ref':'Bookingref'},
+  en:{'hero.title':'Welcome to Marivold, Ingrid','hero.sub':"We're looking forward to hosting you",'hero.checkin':'Arrival','hero.checkout':'Departure','hero.room':'Property','hero.guests':'Guests','hero.ref':'Booking ref'},
+  da:{'hero.title':'Velkommen til Marivold, Ingrid','hero.sub':'Vi glæder os til at byde dig velkommen','hero.checkin':'Ankomst','hero.checkout':'Afrejse','hero.room':'Bolig','hero.guests':'Gæster','hero.ref':'Bookingref'},
+  sv:{'hero.title':'Välkommen till Marivold, Ingrid','hero.sub':'Vi ser fram emot att ta emot dig','hero.checkin':'Ankomst','hero.checkout':'Avresa','hero.room':'Boende','hero.guests':'Gäster','hero.ref':'Bokningsref'},
   de:{'hero.title':'Willkommen im Marivold, Ingrid','hero.sub':'Wir freuen uns auf Ihren Besuch','hero.checkin':'Anreise','hero.checkout':'Abreise','hero.room':'Unterkunft','hero.guests':'Gäste','hero.ref':'Buchungsref'}
 };
 function setLang(l){
@@ -1053,10 +985,15 @@ function openSubShop(name){
   document.getElementById('shop-'+name).classList.remove('hidden');
 }
 function openSubInfo(name){
-  document.querySelectorAll('#sec-info .subnav button').forEach(b=>b.classList.remove('active'));
-  event.target.classList.add('active');
+  document.querySelectorAll('#sec-info .subnav button').forEach(b=>{
+    b.classList.toggle('active', b.getAttribute('onclick').includes("'"+name+"'"));
+  });
   document.querySelectorAll('.info-sub').forEach(el=>el.classList.add('hidden'));
   document.getElementById('info-'+name).classList.remove('hidden');
+}
+function openSubInfo2(name){
+  go('info');
+  openSubInfo(name);
 }
 
 /* ---------- Modal (undersider-underside) ---------- */

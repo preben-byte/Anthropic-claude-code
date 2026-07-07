@@ -99,7 +99,7 @@ setter alle modulene på plass:
 | InStay-modul               | Tilsvarende i Marivold-portalen                                     |
 |----------------------------|---------------------------------------------------------------------|
 | Forside / booking          | `#hjem` – hero-kort med bookingref, tidslinje, hurtighandlinger    |
-| Digital innsjekk           | `#innsjekk` – 3-stegs skjema, tidlig innsjekk-tillegg, signatur     |
+| Digital innsjekk           | Bevisst utelatt – Marivold kjører nøkkel-først: boligen er klar 15:00 og nøkkelen aktiveres automatisk, uten innsjekk-skjema. Ankomstinfo ligger under Praktisk info. |
 | Digital nøkkel             | `#nokkel` – hoved-nøkkelkort, felles­dører, historikk, deling       |
 | Ditt rom / bolig           | `#opphold` – boliginfo, fasiliteter, bookingoversikt, forleng       |
 | Opplevelser                | `#opplevelser` – aktiviteter · restauranter · severdigheter · turer · familie · kart |
