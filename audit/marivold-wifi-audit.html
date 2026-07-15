@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="no">
+<head>
+<meta charset="UTF-8">
+<title>Marivold WiFi Audit — 2026-07-15</title>
+<style>
+@page { size: A4; margin: 18mm 16mm; }
+body { font-family: -apple-system, "Helvetica Neue", Arial, sans-serif; font-size: 10.5pt; line-height: 1.45; color: #1a1a1a; }
+h1 { font-size: 20pt; border-bottom: 3px solid #1a1a1a; padding-bottom: 6px; margin-top: 0; }
+h2 { font-size: 14pt; margin-top: 22px; border-bottom: 1px solid #999; padding-bottom: 3px; }
+h3 { font-size: 11.5pt; margin-top: 16px; color: #333; }
+table { border-collapse: collapse; width: 100%; margin: 8px 0; font-size: 9.5pt; }
+th, td { border: 1px solid #bbb; padding: 4px 7px; text-align: left; vertical-align: top; }
+th { background: #eee; font-weight: 600; }
+code, pre { font-family: "SF Mono", Menlo, Consolas, monospace; font-size: 9pt; }
+pre { background: #f4f4f4; padding: 8px 10px; border-left: 3px solid #666; overflow-x: auto; page-break-inside: avoid; }
+code { background: #f0f0f0; padding: 1px 4px; border-radius: 2px; }
+ul, ol { padding-left: 22px; }
+li { margin: 3px 0; }
+hr { border: none; border-top: 1px solid #ccc; margin: 20px 0; }
+.meta { color: #666; font-size: 9pt; font-style: italic; margin-bottom: 20px; }
+.critical { border-left: 4px solid #c00; padding-left: 10px; margin: 8px 0; }
+</style>
+</head>
+<body>
+
+<h1>Marivold WiFi Audit</h1>
+<div class="meta">Dato: 2026-07-15 · Kilde: SSH-output fra fire AP460C + iPhone WiFi-info · Status: kartlegging, ingen endringer utført</div>
+
+<p>Denne rapporten er både en dokumentasjon av dagens tilstand og et selvstendig handoff-dokument. Lim inn hele filen til Claude Code på PC-en for å fortsette arbeidet uten å måtte forklare konteksten på nytt.</p>
+
+<hr>
+
+<h2>Del 1: Kontekst</h2>
+<p>Marivold Resort, XIQ-tenant <code>VHM-HCPDLLOM</code>. Bruker ønsket først å heve <em>max clients</em> på tre AP-er fordi Adm-nettet oppleves «fullt». Diagnose viser at det egentlige problemet er (a) DHCP-scope-utnyttelse på Marivold-guest, ikke Adm, og (b) alvorlig kanalplan-feil på tvers av fire AP-er. Ingen endringer utført enda.</p>
+<p><strong>Bruker jobber lokalt via SSH på AP-er + GUI mot XIQ og Palo Alto.</strong> Claude Code på PC-en har ikke direkte tilgang — rollen er å gi eksakte kommandoer, GUI-oppskrifter og verifikasjonssteg.</p>
+
+<h2>Del 2: Utstyrsinventar</h2>
+
+<h3>Access points (Extreme AP460C, IQ Engine 10.8r7)</h3>
+<table>
+<tr><th>Navn</th><th>Mgmt IP</th><th>Uplink</th><th>2.4 kanal</th><th>5 kanal</th><th>Adm-klienter (2G+5G)</th></tr>
+<tr><td>AP460c-Selvinnsjekk</td><td>192.168.200.203</td><td>X435-8P-4S</td><td>1</td><td>149</td><td>2 + 1</td></tr>
+<tr><td>AP460-Stolpe</td><td>192.168.200.179</td><td>TSW202 (via .1.2)</td><td>11</td><td>60 DFS</td><td>1 + 0</td></tr>
+<tr><td>AP460c-Toalett</td><td>192.168.200.183</td><td>SW7-toalett (.8)</td><td>11</td><td>157</td><td>1 + 0</td></tr>
+<tr><td>AP460c-Resepsjon</td><td>192.168.200.144</td><td>SW5-ButikkTEMP (.6)</td><td>11</td><td>157</td><td>2 + 0</td></tr>
+</table>
+
+<h3>Andre AP-er</h3>
+<ul>
+<li><strong>AP305cx-Gazastripe-Bobil-Ext</strong> (192.168.200.138) — mesh backhaul til Toalett-APen</li>
+<li>Flere Aerohive/Extreme-AP-er sett i ACSP-scan (Vivendel, Marivold-ny osv)</li>
+</ul>
+
+<h3>Switcher</h3>
+<ul>
+<li><strong>SW5-ButikkTEMP</strong> — HP J9774A 2530-8G-PoEP, YA.16.06.0006, 192.168.200.6</li>
+<li><strong>SW7-toalett</strong> — HP J9774A 2530-8G-PoEP, YA.15.16.0006, 192.168.200.8</li>
+<li><strong>X435-8P-4S</strong> — Extreme, ExtremeXOS 30.7.1.1 (des 2020), IP antas 192.168.200.3</li>
+<li><strong>TSW202-skjaering</strong> — industriell gateway på 192.168.1.2 (annet subnet), uplink for Stolpe. Undersøkes.</li>
+</ul>
+
+<h3>Brannmur</h3>
+<p><strong>Palo Alto</strong> på 192.168.200.1 (bekreftet via ARP + default gateway). Ikke logget inn ennå.</p>
+
+<h3>VLAN / subnet</h3>
+<table>
+<tr><th>VLAN</th><th>Navn</th><th>Subnet</th><th>User-profile</th></tr>
+<tr><td>10</td><td>Adm-nett</td><td>192.168.200.0/24</td><td>Adm-nett</td></tr>
+<tr><td>20</td><td>Marivold-guest</td><td>192.168.202.0/24</td><td>Marivold-guest (QoS Rate-Limit-1)</td></tr>
+<tr><td>40</td><td>(ukjent)</td><td>192.168.240.0/24</td><td>—</td></tr>
+<tr><td>—</td><td>Annet</td><td>192.168.1.0/24 via TSW202</td><td>—</td></tr>
+</table>
+
+<h3>SSID-er</h3>
+<ul>
+<li><strong>Adm-nett</strong> — WPA2-PSK AES, VLAN 10, 2.4 + 5GHz</li>
+<li><strong>Marivold-ny</strong> — WPA2-PSK AES, VLAN 20, 2.4 + 5GHz</li>
+</ul>
+
+<h2>Del 3: Klienttall (fra ARP)</h2>
+<ul>
+<li><strong>Adm-nett (192.168.200.x)</strong>: ~30 unike IP-er, 6–8 trådløse. Resten kabel.</li>
+<li><strong>Marivold-guest (192.168.202.x)</strong>: 100+ unike IP-er. Nærmer seg fullt for /24.</li>
+</ul>
+<p><strong>Konklusjon</strong>: «Fullt for IP-tilkoblede enheter»-meldingen gjelder trolig <em>guest-nettet, ikke Adm</em>. Må bekreftes på Palo Alto DHCP.</p>
+
+<h2>Del 4: Kritiske funn</h2>
+
+<div class="critical"><strong>K1 — Kanalplan brutt (2.4GHz).</strong> Tre av fire AP-er kjører kanal 11 samtidig. Egne AP-er stjeler airtime. Resepsjon-APen viser 24 % CRC error og 66 % airtime utilization som direkte konsekvens.</div>
+
+<div class="critical"><strong>K2 — Kanalplan brutt (5GHz).</strong> Toalett og Resepsjon deler kanal 157.</div>
+
+<div class="critical"><strong>K3 — ACSP disabled overalt.</strong> <code>show acsp _last-selection</code> viser Disabled for wifi0/wifi1 på alle AP-er. Kanaler manuelt låst uten koordinering. Merk: å bare skru på ACSP gir samme resultat (alle ender på 11) fordi ekstern interferens gjør 1 og 6 dyrere. Løsning: manuell 1/6/11 basert på fysisk plassering.</div>
+
+<div class="critical"><strong>K4 — 11ax-features slått av.</strong> BSS Color = 0, MU-MIMO disabled på 5GHz, A-MSDU disabled, Tx Chain static 2 på 2.4 på Resepsjon.</div>
+
+<div class="critical"><strong>K5 — Firmware aldrende.</strong> X435 kjører 30.7.1.1 fra 2020. HP 2530 er 1 Gbit / 8 porter / 802.3at.</div>
+
+<div class="critical"><strong>K6 — Adm-nett har 0 klienter på 5GHz.</strong> SSID kringkastes, men ingen kobler seg til (klienter er POS/skrivere som er 2.4-only). Vurder Adm som 2.4-only.</div>
+
+<div class="critical"><strong>K7 — Stolpe uplinker via 192.168.1.2 (TSW202).</strong> Merkelig arkitektur. Årsak må undersøkes.</div>
+
+<h2>Del 5: Bra ting</h2>
+<ul>
+<li>CAPWAP til XIQ stabil (Selvinnsjekk uptime 21 dager, 843 GB tunnellet)</li>
+<li>Temperatur 41–44°C på alle AP-er</li>
+<li>Ingen radar detected på DFS</li>
+<li>Mesh backhaul Toalett ↔ Gazastripe-Bobil-Ext fungerer</li>
+<li>PoE 802.3at overalt, 7 W usage — god margin</li>
+</ul>
+
+<h2>Del 6: Prioritert fikselite</h2>
+
+<h3>P0 — Kanalplan (i XIQ Radio Profile)</h3>
+<table>
+<tr><th>AP</th><th>2.4GHz</th><th>5GHz</th></tr>
+<tr><td>Selvinnsjekk</td><td>1</td><td>36</td></tr>
+<tr><td>Stolpe</td><td>6</td><td>100 (DFS)</td></tr>
+<tr><td>Toalett</td><td>11</td><td>149</td></tr>
+<tr><td>Resepsjon</td><td>6</td><td>157</td></tr>
+</table>
+
+<h3>P1 — 11ax-features (Radio Profile)</h3>
+<ul>
+<li>BSS Coloring: Auto (begge radioer)</li>
+<li>MU-MIMO: On (5GHz)</li>
+<li>A-MSDU: On</li>
+</ul>
+
+<h3>P2 — TX power ned</h3>
+<p>Radio Profile 2G: Max TX = 10 dBm (fra 12). Reduserer overlap mellom egne AP-er.</p>
+
+<h3>P3 — Verifiser guest-DHCP på Palo Alto</h3>
+<pre>ssh admin@192.168.200.1
+show dhcp server settings all
+show dhcp server lease interface all</pre>
+<p>Sannsynlig funn: guest-scope mindre enn /24. Fix: utvid til hele /24 eller flytt til /23.</p>
+
+<h3>P4 — Firmware</h3>
+<p>Oppgrader X435 fra 30.7.1.1 til nyeste 32.x GA. Etter det: vurder HP 2530-bytte.</p>
+
+<h3>P5 — Undersøk TSW202</h3>
+<p>Hva står den for? Hvorfor uplinker Stolpe-APen via 192.168.1.2?</p>
+
+<h2>Del 7: Neste steg for Claude Code</h2>
+<p>Når du blir promptet på PC-en, kan bruker be deg om:</p>
+<ol>
+<li><strong>Skriv XIQ-oppskrift</strong> for P0/P1/P2 med eksakte klikk-stier</li>
+<li><strong>Skriv Palo Alto commit-blokk</strong> for guest-DHCP — trenger P3-output først</li>
+<li><strong>Skriv rollback-plan</strong> før noen endring gjøres</li>
+<li><strong>Bygg videre på scaffoldet</strong> i <code>agents/wifi/</code> for å automatisere XIQ-audit (repo: <code>preben-byte/Anthropic-claude-code</code>, branch <code>claude/wifi-config-optimization-tzoxnf</code>)</li>
+</ol>
+<p><strong>Ikke gi CLI-kommandoer for IQ Engine 10.8 uten å sjekke syntax først</strong> — feil kommando kan ta radioen ned. Alle endringer skal helst inn i XIQ (overlever strømbrudd og re-provisioning).</p>
+<p>Bruker har både <strong>Palo Alto og Cisco</strong>. Palo Alto er brannmur på .1. Cisco er ikke identifisert enda.</p>
+
+<h2>Del 8: Referansedata</h2>
+<ul>
+<li>Radio-profiler: <code>Marivold-AP460C-Outdoor-2G</code>, <code>Marivold-AP460C-Outdoor-5G</code></li>
+<li>QoS-policy: <code>Rate-Limit-1</code> (1 Gbps user limit) for guest</li>
+<li>CAPWAP primary: <code>se-cws-0.extremecloudiq.com</code>, backup: <code>se-cwm.extremecloudiq.com</code></li>
+<li>Region: World, Country code 410 (Norge)</li>
+<li>Native VLAN på AP-eth0: 10 (Adm) — AP-management på Adm-VLAN</li>
+<li>Sikkerhet: alle SSID WPA2-PSK / AES CCMP. Ingen WPA3, 802.1X eller PPSK. Verdt oppgradering.</li>
+</ul>
+
+</body>
+</html>
