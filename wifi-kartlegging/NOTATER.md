@@ -39,8 +39,11 @@ dekningskart for campingplassen, slik at arbeidet kan gjenopptas i en senere øk
   483,2815 i fullskala-bildet). Ikke lenger antatt – FASIT.
 - **Sonene 201–260/264 = alle umerkede felt** med campingvogner, dvs. hele
   resten av området innenfor den gule linjen som ikke har egen merking.
-- **Dekningskrav: 100 % i hele det gult inngjerdede området** – fra
-  Resepsjon mot 101–119, ved 240–244, ned mot Nedre toalett, og alt imellom.
+- **Dekningskrav (endelig formulering): 100 % dekning overalt der det ikke
+  er skog** – fra Resepsjon mot 101–119, ved 240–244, ned mot Nedre toalett,
+  og alt imellom. (Erstatter den tidligere «gul linje»-avgrensningen; eier
+  leverte 28.07 en ny kartversjon uten gul linje og uten turkis boks –
+  `kart-med-tekst.png` er oppdatert til denne.)
 - Åpent spørsmål: kartet ser ut til å ha 10 gule nåler, mens forrige økt
   talte ni Atomer – stemmer 10, eller er én av dem noe annet?
 
