@@ -41,6 +41,45 @@ dekningskart for campingplassen, slik at arbeidet kan gjenopptas i en senere øk
    301–342, plassene 101–119 og 120–122, samt bygningene (toaletter,
    selvinnsjekk, resepsjon/kafé/restaurant).
 
+## Gjenopprettet kontekst fra forrige samtale (XIQ-/RF-analyse)
+
+Status fra forrige økt («Nålkart v3»), limt inn av eier 28.07.2026:
+
+### Bekreftede AP-posisjoner (fasit)
+
+- Fire posisjoner er fasit-bekreftet (merket FASIT i nålkart v3), pluss
+  **Nedre-Toalett** (merket BEKREFTET).
+- Alle gjettede posisjoner er fjernet fra nålkartet. Atomene (hyttene), Kafé,
+  Restaurant, Gazastripe og Vivendel vises ikke igjen før eier gir fasit for dem.
+- **Merk:** Kartene i denne mappen (opplastet 28.07.2026) inneholder trolig
+  mye av denne fasiten: gule pins = Atom30 ved hyttene, blå pins = 305-serie
+  i resepsjon/kafé/restaurant, grønn pin ved «Toalett og gazastripe», samt
+  soner 101–119, 120–122 og telt 301–342. Vivendel er ikke merket på kartet.
+
+### Tre hovedfunn fra analysen
+
+1. **Sør-enden er hovedhullet (dobbelt bekreftet).** Resepsjon står alene
+   nederst ved brygga med 6 svake klienter og 84 % kanalbruk, og RF-matrisen
+   viste AP-en som «ensom». Alt sør for Toalett-bygget (nedre vognrekker,
+   brygga, badeområdet) henger på ett eneste AP.
+2. **Nordfeltet er godt dekket i teorien.** Stolpe midt i feltet, Selvinnsjekk
+   i vest, Nedre-Toalett i nordøst – tre AP-er rundt teltområdet. Stolpes
+   16 % CRC-feil på 2,4 GHz skyldes trolig kanalkaos (alle på 1/6/11 uten
+   plan). Løses av 2026-kanalplanen, ikke av nye AP-er.
+3. **XIQ-kartet var villedende.** Stolpe lå i feil ende av anlegget i XIQ.
+   Planen er å laste opp eierens kartbilde som nytt kartunderlag i XIQ og
+   plassere AP-ene etter fasit – først da blir XIQ sitt heatmap til å stole på.
+
+### Neste steg (avtalt i forrige økt)
+
+1. Fasit-prikker for resten: Atomene (hyttene), Kafé, Restaurant, Gazastripe,
+   Vivendel – pluss omtrentlig soneinndeling (101–119, 120–122, 201–260/264,
+   telt, 301–342). *Kartene i denne mappen dekker trolig det meste av dette.*
+2. Laste opp kartbildet som nytt kartunderlag i XIQ (trygt, ved siden av det
+   gamle).
+3. Lagerliste fra eier, for å beregne om sør-hullet ved Resepsjon kan tettes
+   med utstyr som allerede eies.
+
 ## Designforbedringer til neste versjon av kartet
 
 - Symbolet for «området» i tegnforklaringen (hvit stiplet omriss) matcher ikke
