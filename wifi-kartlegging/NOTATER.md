@@ -70,6 +70,40 @@ Status fra forrige økt («Nålkart v3»), limt inn av eier 28.07.2026:
    Planen er å laste opp eierens kartbilde som nytt kartunderlag i XIQ og
    plassere AP-ene etter fasit – først da blir XIQ sitt heatmap til å stole på.
 
+### Tidligere steg: Nålkart v2 (ANTATTE posisjoner – delvis overstyrt av v3-fasit)
+
+Anlegget heter **Marivold** (XIQ-kartforslag: «Marivold_hele», kartbilde
+1883×4096 px). Alle nåler i v2 var merket ANTATT, resonnert fra
+bygningslogikk + RF-nabomatrisen fordi XIQ-kartet ikke ga fasit.
+Klienttall i parentes = svake klienter på måletidspunktet.
+
+- **Innkjørsel/parkering (vest):** Resepsjon (6 svake), Selvinnsjekk +
+  2 GHz-masten (5 svake – RF beviser at de to står på samme stolpe),
+  Restaurant og Kafé i bygningsklyngen ved siden av.
+- **Veikrysset nordøst for teltfeltet:** Nedre-Toalett (2 svake) – RF sier den
+  hører Selvinnsjekk best, derfor plassert der og ikke ved store sanitærbygget.
+  *(Senere BEKREFTET i v3.)*
+- **Store sanitærbygget (midt):** Toalett + Gazastripe (4 svake, inkl.
+  VIP-TV-en) – RF −46 og kablet i kjede; de står på samme punkt.
+- **Mot brygga i sør:** Stolpe (2 svake) – lå utenfor XIQ-rammen.
+  *(OBS: Overstyrt av fasit – Stolpe står i virkeligheten midt i nordfeltet,
+  jf. v3-funn 2 og eierens kart.)*
+- **Hytterekkene (vest-midt):** alle ni Atomene, 0 svake klienter – hyttene
+  er friske.
+- **Øst ved sjøen:** Vivendel-ext (med 45-timersbrukeren) – fortsatt ANTATT,
+  mangler fasit fra eier.
+
+### XIQ: bytte av kartunderlag (plan fra forrige økt)
+
+- **Anbefalt (trygg) måte:** last opp eierens kartbilde som NYTT kart
+  («Marivold_hele») i Manage → Real Time Maps/Planning, ved siden av det
+  gamle – ingenting ødelegges, det gamle halv-kartet beholdes som backup.
+  Deretter dras AP-ene på plass med nålkartet/fasiten som referanse.
+- Alternativ: bytte bakgrunnsbildet på dagens kart direkte, men da mistes det
+  gamle underlaget umiddelbart.
+- Avgrensning avtalt: kun opplasting og AP-plassering – ingen
+  policy-/deploy-endringer i portalen.
+
 ### Neste steg (avtalt i forrige økt)
 
 1. Fasit-prikker for resten: Atomene (hyttene), Kafé, Restaurant, Gazastripe,
