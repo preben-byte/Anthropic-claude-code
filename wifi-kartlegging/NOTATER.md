@@ -47,6 +47,12 @@ dekningskart for campingplassen, slik at arbeidet kan gjenopptas i en senere øk
   `kart-med-tekst.png` er oppdatert til denne.)
 - Åpent spørsmål: kartet ser ut til å ha 10 gule nåler, mens forrige økt
   talte ni Atomer – stemmer 10, eller er én av dem noe annet?
+- **Stolpe dekker ingenting på sin venstre/vestlige side** – årsak ukjent
+  (sjekkes ved befaring, se F2 i PLAN.md).
+- **Prioriterte områder (P1–P4):** vest-langsiden 240–244 → Selvinnsjekk;
+  mellom Toalett og Selvinnsjekk; «klokka fem» skrått fra Stolpe helt ned
+  til 119; ryggen av hytterekka mot teltområdet.
+- **Badeområdet og brygga er IKKE prioritert.**
 
 ## Viktige avklaringer fra eier (28.07.2026)
 
