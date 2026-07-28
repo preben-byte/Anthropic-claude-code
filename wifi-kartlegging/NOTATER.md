@@ -32,6 +32,18 @@ dekningskart for campingplassen, slik at arbeidet kan gjenopptas i en senere øk
 - Toalett og gazastripe – grønn pin sentralt
 - Resepsjon, kafé og restaurant – sør, med blå pins (305-serie innendørs)
 
+## Fasit-avklaringer fra eier (28.07.2026, kveld)
+
+- **Vivendel-ext = den hvite nålen blant hyttene** – nærmest Atomene, mellom
+  dem og Resepsjon (delvis skjult bak den gule linjen på kartet, ca. pixel
+  483,2815 i fullskala-bildet). Ikke lenger antatt – FASIT.
+- **Sonene 201–260/264 = alle umerkede felt** med campingvogner, dvs. hele
+  resten av området innenfor den gule linjen som ikke har egen merking.
+- **Dekningskrav: 100 % i hele det gult inngjerdede området** – fra
+  Resepsjon mot 101–119, ved 240–244, ned mot Nedre toalett, og alt imellom.
+- Åpent spørsmål: kartet ser ut til å ha 10 gule nåler, mens forrige økt
+  talte ni Atomer – stemmer 10, eller er én av dem noe annet?
+
 ## Viktige avklaringer fra eier (28.07.2026)
 
 1. **Den gule streken skal i utgangspunktet bort.** Spesielt den lange rette
