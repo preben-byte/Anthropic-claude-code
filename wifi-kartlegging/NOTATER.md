@@ -10,6 +10,7 @@ dekningskart for campingplassen, slik at arbeidet kan gjenopptas i en senere øk
 | `kart-med-tekst.png` | Kart med områdenavn, plassnummer og etiketter |
 | `kart-rent.png` | Samme kart uten tekst – kun pins og områdelinje |
 | `tegnforklaring.png` | Forklaring på pin-fargene |
+| `naalkart-v4.html` | Interaktivt nålkart (zoom/panorér/trykk) bygget på hele satellittbildet, med fasit-posisjoner fra eierens kart + svake klienter per AP. Vivendel er markert ANTATT (stiplet) og trenger fasit. |
 
 ## Tegnforklaring (utstyr)
 
@@ -69,6 +70,33 @@ Status fra forrige økt («Nålkart v3»), limt inn av eier 28.07.2026:
 3. **XIQ-kartet var villedende.** Stolpe lå i feil ende av anlegget i XIQ.
    Planen er å laste opp eierens kartbilde som nytt kartunderlag i XIQ og
    plassere AP-ene etter fasit – først da blir XIQ sitt heatmap til å stole på.
+
+### Tidligste steg: nålkart v1 («naalkart-svake-klienter.html»)
+
+Første interaktive leveranse, bygget på XIQ-kartet (kun nordre halvdel, med
+Stolpe-avviket dokumentert). Én nål per AP som bar svake klienter
+(RSSI ≤ −75), farge = alvorlighetsgrad:
+
+| AP | Svake klienter | Nivå |
+|---|---|---|
+| Resepsjon | 6 | 🔴 |
+| Selvinnsjekk | 5 | 🔴 |
+| Toalett (m/Gazastripe) | 4 | 🔴 (inkl. VIP-TV på −80) |
+| Stolpe | 2 | 🟠 |
+| Nedre-Toalett | 2 | 🟠 |
+| Restaurant | 1 | 🟡 |
+| Vivendel | 1 | 🟡 (45-timersbrukeren på −75) |
+| Alle ni Atomene | 0 | 🟢 – hyttene er friske |
+
+Presisjonsforbehold (viktig): en svak klient befinner seg i ytterkanten av
+sitt AP sin dekning – nålen står på AP-et, ringen rundt er sannhetsområdet.
+Uten posisjoneringsmotor finnes ikke gjestens eksakte punkt. Hullene som
+avtegnet seg: feltet rundt Resepsjon og aksen Selvinnsjekk/Toalett/Stolpe –
+uteområdene mellom bygningene.
+
+Lovet sluttleveranse når tegning + lagerliste foreligger: sone-for-sone-plan –
+hvilken bygning, hvilken vegg, hvilken høyde, hvilken retning, hvilken
+kabeltrasé, med utstyret fra lagerlisten først.
 
 ### Tidligere steg: Nålkart v2 (ANTATTE posisjoner – delvis overstyrt av v3-fasit)
 
