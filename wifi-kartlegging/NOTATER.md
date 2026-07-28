@@ -53,6 +53,15 @@ dekningskart for campingplassen, slik at arbeidet kan gjenopptas i en senere øk
   mellom Toalett og Selvinnsjekk; «klokka fem» skrått fra Stolpe helt ned
   til 119; ryggen av hytterekka mot teltområdet.
 - **Badeområdet og brygga er IKKE prioritert.**
+- Feltobservasjoner (sen kveld): Resepsjonen dekker bra lokalt, men ikke opp
+  til 120/121/122. Gaza dekker bobilfeltet bra (blir stående). Toalett-
+  enhetens bidrag usikkert – trolig feilplassert, flyttes til motsatt gavl.
+  Stolpe har alltid mange klienter. Eier vil montere på fremste hytte
+  (Atom30 nærmest øvre toalett) og bytte Nedre-Toalett-retningsløsningen
+  mot AP460c (gjenbruk av antennen).
+- Utstyrsspørsmål besvart i PLAN.md: retningsvarianter av AP460c =
+  AP460S6C (60° sektor) og AP460S12C (120° sektor); ev. AP5050D (Wi-Fi 6E,
+  retning). Bekreftes hos leverandør.
 
 ## Viktige avklaringer fra eier (28.07.2026)
 
