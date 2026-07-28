@@ -18,6 +18,12 @@
   .maplabel { position:absolute; transform:translate(-50%,-50%); color:#fff; font-weight:700; font-size:15px;
         text-shadow:0 1px 4px rgba(0,0,0,.9), 0 0 10px rgba(0,0,0,.6); pointer-events:none; white-space:nowrap;
         background:rgba(0,0,0,.35); padding:2px 8px; border-radius:6px; }
+  .prop { position:absolute; transform:translate(-50%,-50%) scale(var(--inv,1)) rotate(45deg); width:30px; height:30px;
+        border:3px solid #00e5ff; background:rgba(0,229,255,.22); box-sizing:border-box; cursor:pointer; }
+  .prop.opt { border-style:dashed; }
+  .prop .tag { position:absolute; top:-24px; left:50%; transform:translate(-50%,0) rotate(-45deg); color:#00e5ff;
+        font-size:13px; font-weight:800; text-shadow:0 1px 3px rgba(0,0,0,.95); }
+  .prop.selected { background:rgba(0,229,255,.5); }
   .zone { position:absolute; transform:translate(-50%,-50%); border-radius:50%; pointer-events:none; }
   .hole-red    { background:rgba(255,59,48,.16);  border:2px dashed rgba(255,99,90,.75); }
   .hole-orange { background:rgba(255,149,0,.13); border:2px dashed rgba(255,170,60,.7); }
@@ -57,6 +63,13 @@
     <div class="mk green" style="left:25.969%;top:66.04%" title="Atom30 – hytte 8: 0 svake" onclick="showInfo(this,'Atom30 – hytte 8 (FASIT)','Atom30 i hytte. 0 svake klienter – hyttene er friske.')"><span class="badge">0</span></div>
     <div class="mk green" style="left:23.686%;top:67.09%" title="Atom30 – hytte 9: 0 svake" onclick="showInfo(this,'Atom30 – hytte 9 (FASIT)','Atom30 i hytte. 0 svake klienter – hyttene er friske.')"><span class="badge">0</span></div>
     <div class="mk green" style="left:21.986%;top:68.652%" title="Atom30 – hytte 10: 0 svake" onclick="showInfo(this,'Atom30 – hytte 10 (FASIT)','Atom30 i hytte. 0 svake klienter – hyttene er friske.')"><span class="badge">0</span></div>
+    <div class="prop" style="left:50.451%;top:62.5%" title="F1 – NYTT AP460c: lekeplass/ballfeltet" onclick="showInfo(this,'F1 – NYTT AP460c: lekeplass/ballfeltet','Nytt utendørs AP460c på stolpe mellom 120–122 og 101–119, høyde 4–6 m, nedtilt 5–10°. Dekker 101–119, 120–122, ballfeltet og gressletta. Kabel: ca. 80–100 m cat6 fra kjede-switchen i sanitærbygget, langs veien østover.')"><span class="tag">F1</span></div>
+    <div class="prop" style="left:37.175%;top:72.998%" title="F2 – NY hvit retningsløsning: Resepsjonens sørgavl" onclick="showInfo(this,'F2 – NY hvit retningsløsning: Resepsjonens sørgavl','305-serie med 2,4 GHz retningsantenne på sørgavlen av resepsjonsbygget, over takrenna, siktet sørøst langs brygga mot badeområdet. Avlaster Resepsjon-AP-et for de fjerneste klientene (dagens 6 svake). Kort kabel fra resepsjons-switchen gjennom sørveggen.')"><span class="tag">F2</span></div>
+    <div class="prop" style="left:45.672%;top:58.105%" title="F3 – FLYTT Gazastripe-enheten til østgavlen" onclick="showInfo(this,'F3 – FLYTT Gazastripe-enheten til østgavlen','Toalett og Gazastripe står i dag på samme punkt (RF −46) – null gevinst. Flytt Gazastripe-enheten til østgavlen av sanitærbygget (eller stolpe like øst), retning øst/sørøst mot 101–119. VIP-TV-en på −80 får da et nært AP. 0 nytt utstyr, kun 10–20 m kabelforlengelse.')"><span class="tag">F3</span></div>
+    <div class="prop" style="left:24.164%;top:52.246%" title="F4 – LØFT Selvinnsjekk + vinkle masten mot teltfeltet" onclick="showInfo(this,'F4 – LØFT Selvinnsjekk + vinkle masten mot teltfeltet','Hev AP460c på stolpen til 5–6 m hvis lavere i dag, og vinkle 2,4 GHz-antennen på samme stolpe sørvest mot teltområdet 301–342 – teltfeltet har ingen egen dekning. 0 nytt utstyr.')"><span class="tag">F4</span></div>
+    <div class="prop" style="left:63.463%;top:35.889%" title="F5 – JUSTER retningsantennen på Nedre-Toalett" onclick="showInfo(this,'F5 – JUSTER retningsantennen på Nedre-Toalett','Sikt den hvite 2,4 GHz-retningsantennen sørvest mot 240–244-sløyfa, montert over takhøyde med fri sikt. Nordfeltet trenger ikke flere AP-er – kanalplanen fikser CRC-feilen på Stolpe.')"><span class="tag">F5</span></div>
+    <div class="prop opt" style="left:15.666%;top:58.594%" title="F6 – OPSJON: AP mot teltfeltet 301–342" onclick="showInfo(this,'F6 – OPSJON: AP mot teltfeltet 301–342','Bare hvis F4-vinklingen ikke løfter teltfeltet nok: AP460c (evt. ledig Atom) på gavl av nærmeste hytte, retning vest over teltene.')"><span class="tag">F6</span></div>
+    <div class="prop opt" style="left:43.016%;top:67.383%" title="F7 – OPSJON: ekstra AP460c i nedre vognrekker" onclick="showInfo(this,'F7 – OPSJON: ekstra AP460c i nedre vognrekker','Bare hvis Resepsjon fortsatt ligger over ~60 % kanalbruk etter F1+F2: stolpemontert AP460c midt i nedre vognrekke.')"><span class="tag">F7</span></div>
   </div>
 </div>
 <div id="legend">
@@ -69,6 +82,7 @@
     <span class="dot" style="background:#34c759"></span>0 – frisk<br>
     Stiplet ring = ANTATT posisjon.<br>
     Skraverte felt = dekningshull.<br>
+    <span style="color:#00e5ff">◆</span> F1–F7 = forslag (nytt/flytt/<br>l&oslash;ft) – stiplet ◆ = opsjon.<br>
     <b>Krav:</b> 100&nbsp;% dekning overalt<br>der det ikke er skog.<br>
     <i>Trykk på en ring for detaljer.</i>
   </div>

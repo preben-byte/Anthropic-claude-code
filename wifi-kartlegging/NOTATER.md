@@ -10,6 +10,7 @@ dekningskart for campingplassen, slik at arbeidet kan gjenopptas i en senere øk
 | `kart-med-tekst.png` | Kart med områdenavn, plassnummer og etiketter |
 | `kart-rent.png` | Samme kart uten tekst – kun pins og områdelinje |
 | `tegnforklaring.png` | Forklaring på pin-fargene |
+| `PLAN.md` | Forslag til dekningsplan F1–F7 (sone for sone: bygning, vegg, høyde, retning, kabeltrasé) – venter på bekreftelse mot lagerlisten. |
 | `naalkart-v4.html` | Interaktivt nålkart (zoom/panorér/trykk) bygget på hele satellittbildet, med fasit-posisjoner fra eierens kart + svake klienter per AP. Vivendel er markert ANTATT (stiplet) og trenger fasit. |
 
 ## Tegnforklaring (utstyr)
