@@ -12,6 +12,7 @@ dekningskart for campingplassen, slik at arbeidet kan gjenopptas i en senere øk
 | `tegnforklaring.png` | Forklaring på pin-fargene |
 | `PLAN.md` | Forslag til dekningsplan F1–F7 (sone for sone: bygning, vegg, høyde, retning, kabeltrasé) – venter på bekreftelse mot lagerlisten. |
 | `kart-eier-utkast-airmax.png` | Eierens utkast 29.07 med airMAX 5 GHz-baser (kremgule nåler) – vurdert i PLAN.md. |
+| `kart-eier-utkast-460c.png` | Eierens utkast B 29.07: «nesten bare AP460c» (6 grønne + 2 airMAX) – vurdert i PLAN.md, anbefalt som grunnlag. |
 | `naalkart-v4.html` | Interaktivt nålkart (zoom/panorér/trykk) bygget på hele satellittbildet, med fasit-posisjoner fra eierens kart + svake klienter per AP. Vivendel er markert ANTATT (stiplet) og trenger fasit. |
 
 ## Tegnforklaring (utstyr)

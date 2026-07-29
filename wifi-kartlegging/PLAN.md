@@ -155,6 +155,42 @@ Vurdering (Claude):
   med Extreme-nettet, og må låses til én fast 5 GHz-kanal som tas ut av
   XIQ sin auto-kanal-liste.
 
+## Eierens utkast B: «nesten bare AP460c» (29.07.2026 – `kart-eier-utkast-460c.png`)
+
+Innhold i utkastet (lest fra kartet):
+
+- **6× AP460c:** Nedre toalett (byttet ✓), Stolpe, Selvinnsjekk (beholdt ✓),
+  sanitærbyggets vestgavl (✓), fremste hytta (✓), Resepsjon (beholdt ✓).
+- **2× airMAX 5 GHz-baser** på sanitærbygget (øst + sør) – eneste ikke-460c.
+- **Alle hvite 2,4-retningsløsninger fjernet:** Selvinnsjekk-masten,
+  Nedre toalett, sanitær-antennen, Vivendel-ext og resepsjonsantennene.
+  Grønn i nedre hytterekke fra utkast A er også tatt bort.
+- Blå 305 inne i restaurant/kafé og Atomene i hyttene som før.
+
+Vurdering (Claude) – dette er det beste skjelettet så langt:
+
++ Ensartet: alt gjestenett på AP460c i XIQ, dobbelt bånd overalt, ekte
+  roaming, enkel drift. Selvinnsjekk og Resepsjon beholder ankrene sine.
++ Utstyrsregnskap: dagens 5 grønne + tvillingen som frigjøres fra
+  sanitærpunktet → trolig bare **1 ny AP460c** å kjøpe for å nå 6.
++ Frigjør alle 305/retningsantenner som reservelager.
+
+− **Hull 1 (størst): 120–122 og 101–119 får ingenting nytt.** Eier har selv
+  bekreftet at Resepsjonen ikke når dit. airMAX-basene peker den veien, men
+  som gjestedekning er de feil verktøy (utenfor XIQ, ingen roaming, TDMA).
+  → Løsning: behold utkast B og legg til F1-stolpen ved lekeplassen, matet
+  av den ene airMAX-basen som backhaul. Da får airMAX-ene riktig jobb.
+− **Hull 2: Vivendel fjernet** – 45-timersbrukeren (−75) mister sin nærmeste
+  radio og faller tilbake på Resepsjon (~80 m). Anbefaling: la Vivendel stå
+  til etter måling, den koster ingenting der den henger.
+− P4 (teltfelt/hytterygger) bæres av fremste hytta alene – test etter
+  montering; retningsantenne fra reservelageret kan suppleres ved behov.
+− P1 står og faller på Stolpe-fiksen (F2) som før.
+
+**Konklusjon utkast A vs B:** B vinner. B + F1(+backhaul) + Vivendel på nåde
+= komplett plan. Estimert innkjøp: 1× AP460c + 1× AP460S12C (F1), resten
+gjenbruk.
+
 ## Åpne punkter
 
 - Hva er den fysiske forklaringen på Stolpes blinde vestside? (Sjekkes ved
