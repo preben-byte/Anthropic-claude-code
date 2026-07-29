@@ -410,6 +410,29 @@ Montering: 1) F2-befaring Stolpe. 2) G-flyttingene. 3) W/S-sektorene etter
 tabellene. 4) Kanalplan i XIQ (2,4: tabellen over; 5 GHz auto/40 MHz).
 5) Mål – og rapportér tilbake CRC/svake klienter etter en uke.
 
+## Roaming-oppskriften: omni + sektor på samme mast (29.07.2026)
+
+Arkitekturen bekreftet med eier: AP460c = lyspære (360°, dekning),
+305CX + sektorantenne = lommelykt (fart i én retning). Par i planen:
+S1+W1 på Selvinnsjekk-stolpen · S2+W3 på Nedre toalett · S3+G2 på
+sanitærbygget · S4+G4 på resepsjonen.
+
+Fire innstillinger i XIQ som får roamingen til å flyte:
+
+1. **Samme SSID og sikkerhetsoppsett** på alle radioer (én nettverkspolicy).
+2. **Aldri samme kanal på samme mast:** 5 GHz-sektoren og 460c-ens
+   5 GHz-radio på ulike kanaler (auto-kanal i XIQ fikser dette når AP-ene
+   står riktig på kartet); 2,4-kanalene etter tabellene.
+3. **Lavere effekt på 2,4 enn 5 GHz** – da foretrekker telefonene 5 GHz og
+   «faller ned» på 2,4 kun i ytterkant. Slå på 802.11k/v (band steering /
+   smart roaming) i policyen.
+4. **Antenneprofil på 305CX:** velg riktig ekstern antenne/gain i XIQ per
+   enhet, ellers regner den effekt som om den hadde standardantenner.
+
+Fysisk på masten: ca. 1 m vertikal avstand mellom omni og sektor, sektoren
+øverst eller nederst etter hvor kastet skal – ikke rygg mot rygg i samme
+høyde.
+
 ## Åpne punkter
 
 - Hva er den fysiske forklaringen på Stolpes blinde vestside? (Sjekkes ved
