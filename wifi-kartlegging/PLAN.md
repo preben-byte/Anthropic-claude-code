@@ -131,6 +131,30 @@ et felt eller langs en stripe.
 Minimum nytt: **2 enheter** – 1 til F1 (helst S12C-sektor) + 1 AP460c til
 F5-byttet; F6 blir da gratis (gjenbruk). Med alle opsjoner: inntil 4.
 
+## Eierens utkast med airMAX (29.07.2026 – `kart-eier-utkast-airmax.png`)
+
+Eier tegnet et utkast der kremgule nåler = Ubiquiti airMAX 5 GHz
+basestasjoner (samme nålform som hvite 2,4 GHz-antenner):
+
+- Nedre toalett → grønn AP460c (= F5 ✓). Sanitærbygg: grønn til vestgavl
+  (= F3 ✓), hvit 2,4 står igjen, + 2× airMAX-baser (øst + sør).
+- 2 nye grønne på hytterekka: fremste hytta (= F6 ✓) + nedre rekke (= F7).
+- Resepsjon: 2 hvite 2,4-retningsantenner på nordsiden (mot 120–122).
+- Selvinnsjekk og Resepsjon mistet de grønne (trolig gjenbrukt).
+
+Vurdering (Claude):
+- Enig i F5/F3/F6/F7-delene.
+- ADVARSEL 1: Selvinnsjekk uten AP460c = nytt hull (5 svake, ankrer
+  innkjøring/parkering/P1-sør). Behold den grønne der.
+- ADVARSEL 2: 120–122 via 2,4-retning fra resepsjonen (200–250 m over
+  vognrekkene) gir «fulle streker, dårlig fart» – klientene når ikke tilbake.
+  F1 på stolpe ved lekeplassen er fortsatt riktig løsning.
+- ANBEFALT ROLLE for airMAX: trådløs backhaul, ikke gjeste-AP. Base på
+  sanitærbygget → CPE på F1-stolpen (sparer 80–100 m kabel); base nr. 2 kan
+  mate F8 senere. airMAX styres utenfor XIQ (airOS/UISP), har ikke roaming
+  med Extreme-nettet, og må låses til én fast 5 GHz-kanal som tas ut av
+  XIQ sin auto-kanal-liste.
+
 ## Åpne punkter
 
 - Hva er den fysiske forklaringen på Stolpes blinde vestside? (Sjekkes ved
