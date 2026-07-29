@@ -274,6 +274,51 @@ motsatt vei – bytt om ved behov.
 lageret har (eller kjøp én – det er det ene kjøpet som gjenstår i D).
 D + resepsjons-AP = den mest komplette planen av alle utkastene.
 
+## Claudes ideal-oppsett (29.07.2026 – `kart-claude-ideal.jpg`)
+
+Forutsetning fra eier: strømstolper med gatelys langs hele veinettet
+(asfalt) – stolpemontering med strøm er mulig overalt langs vei.
+Stolpe (AP-et) skal stå der det står. Null kjøp: 5 grønne + 5 hvite + 2 airMAX.
+
+### AP460c (grønne, omni ~75 m nytteradius)
+
+| # | Plassering | Rolle | Kanal |
+|---|---|---|---|
+| G1 | STOLPE (står, F2-fiks forutsatt) | østre nordfelt + midtre P3 | 6 |
+| G2 | Selvinnsjekk-stolpen | innsjekk, parkering, P1-sør, telt-nord | 1 |
+| G3 | Sanitærbygget (ett punkt, midt/tak) | P2, bobilfeltet, 120–122-vest | 11 |
+| G4 | **Lysstolpe ved lekeplassen** (F1-punktet!) | 101–119, 120–122, P3-sør | 1 |
+| G5 | Resepsjonen | forplass, uteservering, nærmeste rekker | 6 |
+
+G4 = tvillingen som frigjøres fra sanitærbygget. Strøm fra lysstolpen;
+data via **airMAX-link fra sanitærbygget** (150 px ≈ 60 m fri sikt, tegnet
+turkis stiplet) – null graving. airMAX-base 2 = reserve.
+
+### 2,4 GHz retningsantenner (hvite)
+
+| # | Plassering | Retning | Mål | Kanal |
+|---|---|---|---|---|
+| W1 | Selvinnsjekk-stolpen | NNØ ~32° | P1-vestveien + 240–244 | 11 |
+| W2 | Selvinnsjekk-stolpen | SSV ~205° | teltfeltet 301–342 | 6 |
+| W3 | Nedre toalett | SV ~228° | 240-sløyfa + nordøstfeltet | 1 |
+| W4 | Hytterekka midt | VSV ~255° | hytteryggene (P4) | 11 |
+| W5 | Vivendel | Ø ~88° | nedre vognrekker | 6 |
+
+W1 og W3 møtes midt på P1-stripa – hele langsiden dekket fra to kanter.
+
+### Hvorfor dette er mitt oppsett
+
+- Hvert prioritetsområde har en primærradio OG en sekundær: P1 (W1+W3+G1),
+  P2 (G2+G3), P3 (G1+G3+G4), P4 (W2+W4). Ingen enkelt boks er lenger
+  «ensom» slik Resepsjon var i RF-matrisen.
+- G4 på lysstolpen løser det best dokumenterte hullet (101–119/120–122)
+  med dobbeltbånd på kloss hold – og strømstolpene + airMAX gjør det gratis
+  i infrastruktur.
+- Resepsjonen beholder uteradio (G5) – ingen nye hull skapes.
+- Nedre toalett trenger ikke omni: W3 kaster all energien inn i feltet i
+  stedet for inn i skogen bak.
+- Kanalene over er startverdier; finjuster i XIQ etter naboskapsmatrisen.
+
 ## Åpne punkter
 
 - Hva er den fysiske forklaringen på Stolpes blinde vestside? (Sjekkes ved

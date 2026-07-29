@@ -17,6 +17,7 @@ dekningskart for campingplassen, slik at arbeidet kan gjenopptas i en senere øk
 | `kart-retninger.jpg` | Claudes retningsvalg for W1–W4 tegnet som sektorer + F1-kjøpsanbefaling. |
 | `kart-eier-utkast-D.png` | Eierens utkast D 29.07: grønn flyttet til østfeltet, W5 på sanitær-øst, resepsjonen uten uteradio. |
 | `kart-retninger-v2.jpg` | Claudes tegning for utkast D: W1–W5-sektorer + omni-sirkler G1–G4 (Stolpe som halvsirkel til F2-fiks) + OBS-ring ved resepsjonen. |
+| `kart-claude-ideal.jpg` | Claudes ideal-oppsett 29.07: G1–G5 (AP460c fritt plassert, Stolpe står) + W1–W5-sektorer + airMAX-backhaul til lysstolpen ved lekeplassen. Null kjøp. |
 | `naalkart-v4.html` | Interaktivt nålkart (zoom/panorér/trykk) bygget på hele satellittbildet, med fasit-posisjoner fra eierens kart + svake klienter per AP. Vivendel er markert ANTATT (stiplet) og trenger fasit. |
 
 ## Tegnforklaring (utstyr)
@@ -59,6 +60,7 @@ dekningskart for campingplassen, slik at arbeidet kan gjenopptas i en senere øk
   mellom Toalett og Selvinnsjekk; «klokka fem» skrått fra Stolpe helt ned
   til 119; ryggen av hytterekka mot teltområdet.
 - **Badeområdet og brygga er IKKE prioritert.**
+- **Strømstolper med gatelys langs hele veinettet (asfalt)** – stolpemontering med strøm mulig overalt langs vei (avklart 29.07).
 - Feltobservasjoner (sen kveld): Resepsjonen dekker bra lokalt, men ikke opp
   til 120/121/122. Gaza dekker bobilfeltet bra (blir stående). Toalett-
   enhetens bidrag usikkert – trolig feilplassert, flyttes til motsatt gavl.
