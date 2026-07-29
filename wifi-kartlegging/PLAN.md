@@ -319,6 +319,46 @@ W1 og W3 møtes midt på P1-stripa – hele langsiden dekket fra to kanter.
   stedet for inn i skogen bak.
 - Kanalene over er startverdier; finjuster i XIQ etter naboskapsmatrisen.
 
+## KORREKSJON fra eier (29.07) + Claudes ideal-oppsett v2 (`kart-claude-ideal-v2.jpg`)
+
+**Viktig faktakorreksjon:** Resepsjonen har INGEN utendørs enhet i dag – kun
+to enheter INNE (de blå). Det betyr at «Resepsjon» i XIQ (6 svake, 84 %
+kanalbruk) er en innendørs enhet som betjener uteområdet gjennom veggen.
+Forklarer sør-hullet fullstendig. (Tidligere antagelse om grønn ute ved
+resepsjonen var feil.)
+
+Reell grønn-beholdning i dag: 4× AP460c = Selvinnsjekk, Stolpe, Toalett,
+Gaza. Eier ser ikke poenget med grønn på Selvinnsjekk (enig: de 5 svake der
+var gjester ute i feltene, som nå tas av W1/W2) – den frigjøres.
+
+### Ideal v2 – tegnforklaring
+
+- **Grønn sirkel** = AP460c utendørs (omni); enheten i sentrum, ~75 m radius.
+- **Farget kjegle** = hvit 2,4 GHz retningsantenne (305); står i spissen,
+  sender dit kjeglen peker. Farge kun for å skille: W1 rød, W2 blå,
+  W3 oransje, W4 gul, W5 lilla.
+- **Turkis stiplet** = airMAX 5 GHz punkt-til-punkt (kun backhaul til G3).
+- **Blå nåler** = 305 inne i restaurant/kafé (uendret).
+
+### Plassering (4 grønne – ingen kjøp)
+
+| # | Enhet | Plassering | Kanal |
+|---|---|---|---|
+| G1 | AP460c (står) | Stolpe – F2-fiks forutsatt | 6 |
+| G2 | AP460c (Toalett-tvilling 1) | Sanitærbygget, ett punkt | 11 |
+| G3 | AP460c (Gaza-tvilling 2) | Lysstolpe ved lekeplassen; airMAX-matet | 1 |
+| G4 | AP460c (fra Selvinnsjekk) | Resepsjonens NORDVEGG, ute | 6 |
+
+G4 = første utendørs radio noensinne ved resepsjonen – tetter sør-hullet
+ved kilden. W-antenner: W1 Selvinnsjekk→NNØ (11), W2 Selvinnsjekk→SSV
+telt (6), W3 Nedre toalett→SV 240-sløyfa (1), W4 hytterekka→VSV rygger
+(11), W5 lysstolpe nedre vognrekke→NØ over søndre 101–119/ballfeltet (6,
+sømmen mellom G3 og G4; del kanal-finjustering i XIQ).
+
+Svakeste punkt i v2 (bevisst valg): selve innkjøringen/parkeringen får kun
+baksidelober fra W1/W2 – mål etter montering; behold ev. grønn der i stedet
+for G4 hvis innsjekk-dekning viser seg viktigere enn sør-hullet.
+
 ## Åpne punkter
 
 - Hva er den fysiske forklaringen på Stolpes blinde vestside? (Sjekkes ved
