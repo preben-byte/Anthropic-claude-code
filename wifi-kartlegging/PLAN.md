@@ -191,6 +191,44 @@ Vurdering (Claude) – dette er det beste skjelettet så langt:
 = komplett plan. Estimert innkjøp: 1× AP460c + 1× AP460S12C (F1), resten
 gjenbruk.
 
+## Eierens utkast C: null-kjøp med retningsvalg (29.07.2026)
+
+Filer: `kart-eier-utkast-nullkjop.png` (eierens plassering) og
+`kart-retninger.jpg` (Claudes retningsvalg tegnet inn som sektorer).
+
+Plassering (lest fra kartet): 5× AP460c omrokkert uten kjøp – Nedre toalett
+(fra Selvinnsjekk), Stolpe, sanitærbyggets NORD- og SØR-gavl (tvillingene
+splittet), Resepsjon. 4× hvite 2,4 GHz-retningsantenner utplassert uten
+retning: 2 på Selvinnsjekk-stolpen, 1 midt i hytterekka, 1 på Vivendel-hytta.
+
+### Retningsvalg (Claudes anbefaling)
+
+| Antenne | Posisjon | Retning (asimut) | Mål | 2,4-kanal |
+|---|---|---|---|---|
+| W1 | Selvinnsjekk-stolpen, øverst | NNØ (~30°) | P1: vestveien og 240–244-sløyfa | 11 |
+| W2 | Selvinnsjekk-stolpen, under W1 | SSV (~205°) | Teltfeltet 301–342 | 6 |
+| W3 | Hytta midt i rekka | VSV (~255°) | Hytteryggene + teltfeltets sørdel (P4) | 1 |
+| W4 | Vivendel-hytta | ØNØ (~70°) | Nedre vognrekker (F7-området) | 11 |
+
+Grønne (omni): Nedre toalett kanal 1 · Stolpe 6 · sanitær-N 11 ·
+sanitær-S 1 · Resepsjon 6. Nedtilt 5–10° på W1 (langt kast).
+
+### Vurdering
+
++ Genialt utstyrsregnskap: 0 kjøp. Sanitær-splitten N/S er en god idé –
+  nordgavlen tar P2-retningen, sørgavlen tar 120–122-retningen.
++ W2+W3 løser teltfelt + hytterygger (P4) i tospann.
++ W4 gir nedre vognrekker et løft og beholder nærdekning for
+  45-timersbrukeren.
+− Selvinnsjekk-kiosken selv står igjen med bare baksidelober fra W1/W2 –
+  test innsjekk-opplevelsen på stedet; ev. flytt W2 10° mot vest.
+− Alt det nye kastet er 2,4 GHz: dekning ja, fart måtelig. P1 får streker,
+  men 5 GHz når ikke ut dit uten Stolpe-fiksen (F2 fortsatt kritisk).
+− **101–119 og østre del av 120–122 er fremdeles tynnest.** Sanitær-S
+  hjelper 120–122 (ca. 90 m åpen sikt), men 101–119 ligger 160–240 m unna
+  alt. Det ENE kjøpet som fortsatt anbefales: AP460S12C på stolpe ved
+  lekeplassen (F1). Ellers: aksepter kant-dekning der i sesong én og mål.
+
 ## Åpne punkter
 
 - Hva er den fysiske forklaringen på Stolpes blinde vestside? (Sjekkes ved
