@@ -229,6 +229,51 @@ sanitær-S 1 · Resepsjon 6. Nedtilt 5–10° på W1 (langt kast).
   alt. Det ENE kjøpet som fortsatt anbefales: AP460S12C på stolpe ved
   lekeplassen (F1). Ellers: aksepter kant-dekning der i sesong én og mål.
 
+## Eierens utkast D: grønn i østfeltet (29.07.2026)
+
+Filer: `kart-eier-utkast-D.png` (eierens plassering) og
+`kart-retninger-v2.jpg` (Claudes sektorer + omni-sirkler tegnet inn).
+
+Plassering: 4× AP460c – Nedre toalett (G1), Stolpe (G2), **NY: fritt i
+østfeltet (G3, ca. px 923,2150)**, sanitærbyggets vestende (G4). 5× hvite
+2,4-retningsantenner: 2 på Selvinnsjekk-stolpen (W1/W2), midt i hytterekka
+(W3), Vivendel (W4), **NY: sanitærbyggets østside (W5)**. Resepsjonen har
+INGEN uteradio igjen – kun de to blå 305 inne.
+
+### Retninger og kanaler (Claudes valg)
+
+| Radio | Retning (asimut) | Mål | 2,4-kanal |
+|---|---|---|---|
+| W1 Selvinnsjekk øvre | NNØ ~32° | P1: vestveien + 240–244 | 11 |
+| W2 Selvinnsjekk nedre | SSV ~205° | Teltfeltet 301–342 | 6 |
+| W3 hytterekka | VSV ~255° | Hytteryggene (P4) | 1 |
+| W4 Vivendel | Ø ~88° | Nedre vognrekker + resepsjonsområdet | 11 |
+| W5 sanitær-øst | ØSØ ~118° | 120–122 og 101–119 | 6 |
+| G1 Nedre toalett (omni) | – | veikrysset/240-sløyfa nordøst | 1 |
+| G2 Stolpe (omni, blind vest til F2-fiks) | – | østre nordfelt | 6 |
+| G3 østfeltet (omni) | – | soner 201–264 øst + nordre 101–119 | 11 |
+| G4 sanitær-vest (omni) | – | P2 mot Selvinnsjekk + bobilfeltet | 1 |
+
+Finjustering i XIQ etter naboskap; W3(1) står 80 m fra G4(1) men peker
+motsatt vei – bytt om ved behov.
+
+### Vurdering
+
++ **Beste null-kjøps-dekningen så langt.** G3 i østfeltet er et smart trekk:
+  endelig ekte dobbeltbånd midt i P3, og W5 forlenger mot 101–119.
+  P1 (W1+G2-fiks), P2 (G4), P3 (G2+G3+W5), P4 (W2+W3) – alle truffet.
+- **Prisen er resepsjonen:** ingen uteradio sør for hytterekka. Uteserveringen,
+  forplassen og nærmeste vognrekke får bare W4-kanten og innendørs-305-ene
+  gjennom veggen. Rødstiplet ring på tegningen.
+- G3 i østfeltet trenger stolpe + strøm/kabel ute i feltet – sjekk om det
+  finnes lysstolpe med strøm der; ellers er airMAX-backhaul fra
+  sanitærbygget løsningen (radene fra utkast A).
+- 101–119 sørende ligger fortsatt ytterst i W5-kastet – mål etter montering.
+
+**Anbefaling:** kjør D, men sett inn én AP460c ved resepsjonen igjen hvis
+lageret har (eller kjøp én – det er det ene kjøpet som gjenstår i D).
+D + resepsjons-AP = den mest komplette planen av alle utkastene.
+
 ## Åpne punkter
 
 - Hva er den fysiske forklaringen på Stolpes blinde vestside? (Sjekkes ved

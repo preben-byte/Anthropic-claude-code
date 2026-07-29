@@ -15,6 +15,8 @@ dekningskart for campingplassen, slik at arbeidet kan gjenopptas i en senere øk
 | `kart-eier-utkast-460c.png` | Eierens utkast B 29.07: «nesten bare AP460c» (6 grønne + 2 airMAX) – vurdert i PLAN.md, anbefalt som grunnlag. |
 | `kart-eier-utkast-nullkjop.png` | Eierens utkast C 29.07: null-kjøp, 4 hvite 2,4-antenner uten retning. |
 | `kart-retninger.jpg` | Claudes retningsvalg for W1–W4 tegnet som sektorer + F1-kjøpsanbefaling. |
+| `kart-eier-utkast-D.png` | Eierens utkast D 29.07: grønn flyttet til østfeltet, W5 på sanitær-øst, resepsjonen uten uteradio. |
+| `kart-retninger-v2.jpg` | Claudes tegning for utkast D: W1–W5-sektorer + omni-sirkler G1–G4 (Stolpe som halvsirkel til F2-fiks) + OBS-ring ved resepsjonen. |
 | `naalkart-v4.html` | Interaktivt nålkart (zoom/panorér/trykk) bygget på hele satellittbildet, med fasit-posisjoner fra eierens kart + svake klienter per AP. Vivendel er markert ANTATT (stiplet) og trenger fasit. |
 
 ## Tegnforklaring (utstyr)
