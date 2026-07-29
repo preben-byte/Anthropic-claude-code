@@ -359,6 +359,57 @@ Svakeste punkt i v2 (bevisst valg): selve innkjøringen/parkeringen får kun
 baksidelober fra W1/W2 – mål etter montering; behold ev. grønn der i stedet
 for G4 hvis innsjekk-dekning viser seg viktigere enn sør-hullet.
 
+## SLUTTPLAN med reell lagerliste (29.07.2026 – `kart-sluttplan.jpg`)
+
+**Lagerliste fra eier:** 4× AP460c · 4× airMAX 5 GHz-basestasjoner drevet av
+305CX · 3–4× 2,4 GHz-retningsantenner på 305CX.
+
+**Nøkkelinnsikt:** airMAX-antennene sitter på 305CX → de er fullverdige
+XIQ-AP-er med 5 GHz-sektor: gjestenett, roaming, fart. Tidligere innvending
+(Ubiquiti utenfor XIQ) bortfaller. Totalt 11–12 radioer, null kjøp.
+
+### AP460c (grønne sirkler)
+
+| # | Plassering | Kanal 2,4 |
+|---|---|---|
+| G1 | Stolpe (står; F2-fiks) | 6 |
+| G2 | Sanitærbygget (ett punkt) | 11 |
+| G3 | Lysstolpe lekeplassen – data via XIQ-mesh fra G2 eller kabel | 1 |
+| G4 | Resepsjonens nordvegg UTE (første uteradio der noensinne) | 6 |
+
+### 5 GHz airMAX-sektorer på 305CX (turkise kjegler) – FART
+
+| # | Plassering | Retning | Mål |
+|---|---|---|---|
+| S1 | Selvinnsjekk-stolpen | NNØ ~36° | 240–244 + P1 (fart der W1 gir dekning) |
+| S2 | Nedre toalett | SV ~228° | 240-sløyfa + nordøstfeltet (par med W3) |
+| S3 | Sanitærbyggets østside | ØSØ ~118° | 101–119 |
+| S4 | Resepsjonen | NØ ~42° | nedre vognrekker (fart der folk bor tett) |
+
+5 GHz: 40 MHz, separate kanaler per sektor, DFS ok utendørs – settes i XIQ.
+
+### 2,4 GHz-sektorer på 305CX (varme kjegler) – DEKNING
+
+| # | Plassering | Retning | Mål | Kanal |
+|---|---|---|---|---|
+| W1 | Selvinnsjekk-stolpen | NNØ ~30° | P1 + 240–244 | 11 |
+| W2 | Selvinnsjekk-stolpen | SSV ~205° | teltfeltet | 6 |
+| W3 | Nedre toalett | SV ~228° | 240-sløyfa | 1 |
+| W4 (hvis 4. finnes) | hytterekka midt | VSV ~255° | hytteryggene | 11 |
+
+Har eier bare 3× 2,4: dropp W3 (S2 + G1-fiks dekker sløyfa) og behold W4.
+
+### Prinsippet
+
+2,4-sektorene gir DEKNING (rekker langt, går rundt hjørner), 5 GHz-sektorene
+gir FART i samme områder, og de fire grønne gir tett dobbeltbånd rundt
+knutepunktene. Hvert prioritetsområde P1–P4 har minst to radioer. Sør-hullet
+løses ved kilden: G4+S4 er de første uteradioene ved resepsjonen.
+
+Montering: 1) F2-befaring Stolpe. 2) G-flyttingene. 3) W/S-sektorene etter
+tabellene. 4) Kanalplan i XIQ (2,4: tabellen over; 5 GHz auto/40 MHz).
+5) Mål – og rapportér tilbake CRC/svake klienter etter en uke.
+
 ## Åpne punkter
 
 - Hva er den fysiske forklaringen på Stolpes blinde vestside? (Sjekkes ved

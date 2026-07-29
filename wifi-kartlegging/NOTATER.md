@@ -19,6 +19,7 @@ dekningskart for campingplassen, slik at arbeidet kan gjenopptas i en senere øk
 | `kart-retninger-v2.jpg` | Claudes tegning for utkast D: W1–W5-sektorer + omni-sirkler G1–G4 (Stolpe som halvsirkel til F2-fiks) + OBS-ring ved resepsjonen. |
 | `kart-claude-ideal.jpg` | Claudes ideal-oppsett 29.07: G1–G5 (AP460c fritt plassert, Stolpe står) + W1–W5-sektorer + airMAX-backhaul til lysstolpen ved lekeplassen. Null kjøp. |
 | `kart-claude-ideal-v2.jpg` | Ideal v2 med tegnforklaring på bildet: 4 grønne (G4 = ny uteradio på resepsjonens nordvegg), W5 flyttet til lysstolpe i nedre vognrekke. |
+| `kart-sluttplan.jpg` | SLUTTPLANEN 29.07 med reell lagerliste: G1–G4 + S1–S4 (5 GHz airMAX/305CX) + W1–W4 (2,4/305CX), tegnforklaring på bildet. Null kjøp. |
 | `naalkart-v4.html` | Interaktivt nålkart (zoom/panorér/trykk) bygget på hele satellittbildet, med fasit-posisjoner fra eierens kart + svake klienter per AP. Vivendel er markert ANTATT (stiplet) og trenger fasit. |
 
 ## Tegnforklaring (utstyr)
@@ -40,6 +41,14 @@ dekningskart for campingplassen, slik at arbeidet kan gjenopptas i en senere øk
 - Selvinnsjekk – grønn pin ved innkjøring/parkering vest
 - Toalett og gazastripe – grønn pin sentralt
 - Resepsjon, kafé og restaurant – sør, med blå pins (305-serie innendørs)
+
+## LAGERLISTE fra eier (29.07.2026) – endelig
+
+- 4× AP460c
+- 4× airMAX 5 GHz-basestasjoner, drevet av 305CX (= XIQ-AP-er med 5 GHz-sektor!)
+- 3–4× 2,4 GHz-retningsantenner, også på 305CX
+- 2× 305 inne (restaurant/kafé), Atom30 i hyttene
+- Ingen utendørs enhet ved resepsjonen i dag
 
 ## Fasit-avklaringer fra eier (28.07.2026, kveld)
 
