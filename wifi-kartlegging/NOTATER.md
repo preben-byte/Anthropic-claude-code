@@ -20,6 +20,8 @@ dekningskart for campingplassen, slik at arbeidet kan gjenopptas i en senere øk
 | `kart-claude-ideal.jpg` | Claudes ideal-oppsett 29.07: G1–G5 (AP460c fritt plassert, Stolpe står) + W1–W5-sektorer + airMAX-backhaul til lysstolpen ved lekeplassen. Null kjøp. |
 | `kart-claude-ideal-v2.jpg` | Ideal v2 med tegnforklaring på bildet: 4 grønne (G4 = ny uteradio på resepsjonens nordvegg), W5 flyttet til lysstolpe i nedre vognrekke. |
 | `kart-sluttplan.jpg` | SLUTTPLANEN 29.07 med reell lagerliste: G1–G4 + S1–S4 (5 GHz airMAX/305CX) + W1–W4 (2,4/305CX), tegnforklaring på bildet. Null kjøp. |
+| `Marivold-montasjeplan.pdf` | Montasjeplanen som PDF: tabeller for G1–G4/S1–S4/W1–W4, montasjerekkefølge med sjekkliste, kanalplan og oppfølging. |
+| `Marivold-kartvedlegg.pdf` | Kartvedlegg som PDF: sluttplan-kartet + referansekart med soner. |
 | `naalkart-v4.html` | Interaktivt nålkart (zoom/panorér/trykk) bygget på hele satellittbildet, med fasit-posisjoner fra eierens kart + svake klienter per AP. Vivendel er markert ANTATT (stiplet) og trenger fasit. |
 
 ## Tegnforklaring (utstyr)
