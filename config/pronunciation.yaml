@@ -1,0 +1,27 @@
+# Pronunciation lexicon: Norwegian names, places and technical terms that must
+# be pronounced correctly when they occur inside English sentences.
+#
+# `hint` is a provider-neutral phonetic hint; the ElevenLabs adapter converts
+# entries to the provider's pronunciation-dictionary format where supported.
+# Never rewrite the spelling in data or logs to force pronunciation — the
+# lexicon is applied at TTS time only.
+
+entries:
+  - term: Marivold
+    kind: place
+    hint: "MAH-ree-vol"
+  - term: Paradisbukta
+    kind: place
+    hint: "pah-rah-DEES-book-tah"
+  - term: Beverdalen
+    kind: place
+    hint: "BEH-ver-dah-len"
+  - term: Golanhøyden
+    kind: place
+    hint: "GOO-lan-hoy-den"
+  - term: Preben
+    kind: person
+    hint: "PREH-ben"
+  - term: Grimstad
+    kind: place
+    hint: "GRIM-stah"

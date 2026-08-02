@@ -1,0 +1,29 @@
+# Voice configuration. The voice identity is decoupled from the assistant's
+# name (config/assistant.yaml): renaming the assistant never changes the voice.
+#
+# active_voice points at an entry in config/voice_manifest.json once a voice
+# has been approved by Preben. Until then the Voice Lab runs candidates.
+# The main voice is never changed automatically after approval.
+
+active_voice: null          # set to the approved manifest voice id after Phase 1
+fallback_voice: null        # legal reserve identity, chosen in Phase 1
+provider: elevenlabs
+mock_mode_allowed: true     # Voice Lab runs fully offline without an API key
+
+# Starting ranges from the brief (§6.6) — actual values are decided by tests.
+profiles:
+  realtime:
+    purpose: short dialogue and commands
+    model_hint: eleven_flash_v2_5
+    target_speed: 0.99
+    target_stability: 0.72
+  technical:
+    purpose: network data, numbers, procedures and troubleshooting
+    model_hint: eleven_v3
+    target_speed: 0.95
+    target_stability: 0.78
+  warning:
+    purpose: safety, errors and actions that require confirmation
+    model_hint: eleven_v3
+    target_speed: 0.92
+    target_stability: 0.82

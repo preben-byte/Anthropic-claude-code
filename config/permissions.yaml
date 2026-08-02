@@ -1,0 +1,32 @@
+# Permission model (brief §11). Four risk levels. Voice alone is never
+# sufficient authentication for level 3.
+
+levels:
+  0:
+    name: automatic_read_only
+    approval: none
+    examples: [read status, search documents, summarise, analyse, check calendar, build report]
+  1:
+    name: reversible_local_change
+    approval: automatic_if_unambiguous
+    examples: [create local draft, add task, generate report file, store memory suggestion]
+  2:
+    name: external_or_operational_effect
+    approval: preview_plus_explicit_one_time_approval
+    examples: [send email, create calendar event, publish web content, control Home Assistant device, create booking, send payment link]
+  3:
+    name: critical_or_hard_to_reverse
+    approval: dashboard_plus_reauthentication
+    voice_alone_sufficient: false
+    examples: [network changes, production deploy, deletion, payment or refund, security settings, camera or recording changes, account and access changes]
+
+controls:
+  one_time_confirmation_token: true
+  token_ttl_seconds: 120
+  bind_to_exact_action_and_target: true
+  replay_protection: true
+  idempotency_key: true
+  before_after_snapshot: true
+  rollback_when_possible: true
+  immutable_audit_log: true
+  auto_reject_on_parameter_change_after_approval: true

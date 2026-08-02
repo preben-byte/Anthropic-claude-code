@@ -1,0 +1,26 @@
+# Model registry (Phase 3). Model names are data, not code: update this file
+# to change models — no code change required. These are starting roles from
+# the brief (§8.2); actual best model per role is decided by evaluation sets.
+
+model_roles:
+  voice_fast:
+    description: short dialogue with low latency
+    preferred: null
+  general:
+    description: normal conversation and simple tool tasks
+    preferred: null
+  strategist:
+    description: hard architecture, long horizon and decisive judgement
+    preferred: anthropic/claude-fable-5
+  coding:
+    description: programming, code review and UI work
+    preferred: openai/gpt-5.6-sol
+  private_local:
+    description: sensitive processing that must not leave the site
+    preferred: null
+  research:
+    description: current web information with citations
+    preferred: null
+  vision:
+    description: images, screenshots, maps and technical diagrams
+    preferred: null
