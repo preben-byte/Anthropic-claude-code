@@ -144,6 +144,24 @@ def voice_candidates(
     )
 
 
+@voice_app.command("listen")
+def voice_listen(
+    dir: Path = typer.Option(None, help="Candidates directory (default: var/voice-candidates)"),
+    port: int = typer.Option(7801, help="Local port for the listening test"),
+) -> None:
+    """Serve the blind listening test page for round 1 scoring."""
+    from jarvis.voice_lab.listening_test import serve
+
+    root = _project_root()
+    candidates_dir = dir or root / "var" / "voice-candidates"
+    if not (candidates_dir / "blind_listing.json").is_file():
+        typer.echo("No candidates found — run `jarvis voice candidates` first.")
+        raise typer.Exit(1)
+    typer.echo(f"Åpne http://localhost:{port}/listening_test.html i nettleseren.")
+    typer.echo("Avslutt med Ctrl+C. Scores lagres i scores/ underveis.")
+    serve(candidates_dir, port)
+
+
 @models_app.command("list")
 def models_list(json: bool = typer.Option(False, "--json")) -> None:
     """List model roles from config/models.yaml."""
