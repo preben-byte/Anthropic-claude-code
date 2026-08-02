@@ -4,6 +4,7 @@ import json
 import wave
 from pathlib import Path
 
+from jarvis.voice_lab import adapters as adapters_module
 from jarvis.voice_lab.adapters import MockTTSAdapter, get_adapter
 from jarvis.voice_lab.candidates import generate_candidates
 from jarvis.voice_lab.manifest import VoiceManifest
@@ -13,6 +14,21 @@ from jarvis.voice_lab.texts import TEST_TEXT_EN
 def test_adapter_falls_back_to_mock_without_key(monkeypatch):
     monkeypatch.delenv("ELEVENLABS_API_KEY", raising=False)
     assert get_adapter().provider_name == "mock"
+
+
+def test_adapter_falls_back_to_mock_on_rejected_key(monkeypatch, capsys):
+    """A key the provider definitively rejects must degrade to mock,
+    never crash the Voice Lab."""
+    monkeypatch.setenv("ELEVENLABS_API_KEY", "sk_invalid_key_for_test")
+    monkeypatch.setattr(adapters_module, "validate_api_key", lambda key: False)
+    assert get_adapter().provider_name == "mock"
+    assert "rejected" in capsys.readouterr().err
+
+
+def test_adapter_uses_provider_when_key_is_valid(monkeypatch):
+    monkeypatch.setenv("ELEVENLABS_API_KEY", "sk_valid_key_for_test")
+    monkeypatch.setattr(adapters_module, "validate_api_key", lambda key: True)
+    assert get_adapter().provider_name == "elevenlabs"
 
 
 def test_mock_synthesis_writes_valid_wav(tmp_path: Path):

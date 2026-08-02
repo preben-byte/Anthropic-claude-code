@@ -15,7 +15,7 @@ import yaml
 
 from jarvis.config import find_config_dir, load_config
 from jarvis.secrets import get_secret, load_env_local
-from jarvis.voice_lab.adapters import get_adapter
+from jarvis.voice_lab.adapters import get_adapter, validate_api_key
 from jarvis.voice_lab.candidates import generate_candidates
 from jarvis.voice_lab.texts import STRESS_ITEMS, TEST_TEXT_EN, TEST_TEXT_MIXED
 
@@ -58,10 +58,18 @@ def doctor(json: bool = typer.Option(False, "--json")) -> None:
         checks["config"] = f"FAIL: {exc}"
         ok = False
 
-    # Presence only — never the value.
-    checks["elevenlabs_api_key"] = (
-        "present" if get_secret("ELEVENLABS_API_KEY") else "missing (mock mode)"
-    )
+    # Presence and validity only — never the value.
+    api_key = get_secret("ELEVENLABS_API_KEY")
+    if not api_key:
+        checks["elevenlabs_api_key"] = "missing (mock mode)"
+    else:
+        verdict = validate_api_key(api_key)
+        if verdict is True:
+            checks["elevenlabs_api_key"] = "valid"
+        elif verdict is False:
+            checks["elevenlabs_api_key"] = "invalid (using mock)"
+        else:
+            checks["elevenlabs_api_key"] = "present (api unreachable)"
     checks["voice_lab_mode"] = get_adapter().provider_name
 
     manifest_path = Path(checks.get("config_dir", ".")) / "voice_manifest.json"

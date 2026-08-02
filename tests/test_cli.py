@@ -1,10 +1,17 @@
 import json
 
+import pytest
 from typer.testing import CliRunner
 
 from jarvis.cli import app
 
 runner = CliRunner()
+
+
+@pytest.fixture(autouse=True)
+def _no_ambient_api_key(monkeypatch):
+    """CLI tests must be deterministic regardless of keys in the host env."""
+    monkeypatch.delenv("ELEVENLABS_API_KEY", raising=False)
 
 
 def test_doctor_runs_clean():
@@ -21,8 +28,13 @@ def test_doctor_json_mode():
     assert payload["status"] == "ok"
     assert payload["tts_language"] == "en-GB"
     assert payload["stt_language"] == "nb-NO"
-    # Secret values are never printed, only presence.
-    assert payload["elevenlabs_api_key"] in ("present", "missing (mock mode)")
+    # Secret values are never printed, only presence/validity.
+    assert payload["elevenlabs_api_key"] in (
+        "valid",
+        "invalid (using mock)",
+        "present (api unreachable)",
+        "missing (mock mode)",
+    )
 
 
 def test_voice_test_in_mock_mode(tmp_path):

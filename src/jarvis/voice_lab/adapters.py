@@ -15,6 +15,7 @@ from __future__ import annotations
 import json
 import math
 import struct
+import sys
 import time
 import wave
 from dataclasses import dataclass
@@ -138,10 +139,32 @@ class ElevenLabsAdapter:
         return json.loads(response.text).get("previews", [])
 
 
+def validate_api_key(api_key: str) -> bool | None:
+    """Probe the API read-only. True/False on a definitive answer,
+    None when the API is unreachable (no verdict)."""
+    try:
+        response = httpx.get(
+            f"{ELEVENLABS_BASE_URL}/user",
+            headers={"xi-api-key": api_key},
+            timeout=10,
+        )
+    except httpx.HTTPError:
+        return None
+    return response.status_code not in (401, 403)
+
+
 def get_adapter() -> TTSAdapter:
-    """Real adapter when a key is configured, mock otherwise. Never raises
-    for a missing key — the Voice Lab must always be runnable."""
+    """Real adapter when a working key is configured, mock otherwise.
+    Never raises — the Voice Lab must always be runnable. A key that the
+    provider definitively rejects falls back to mock with a warning."""
     api_key = get_secret("ELEVENLABS_API_KEY")
-    if api_key:
-        return ElevenLabsAdapter(api_key)
-    return MockTTSAdapter()
+    if not api_key:
+        return MockTTSAdapter()
+    if validate_api_key(api_key) is False:
+        sys.stderr.write(
+            "warning: ELEVENLABS_API_KEY was rejected by ElevenLabs (401) — "
+            "falling back to mock mode. Replace the key (it should start "
+            "with 'sk_').\n"
+        )
+        return MockTTSAdapter()
+    return ElevenLabsAdapter(api_key)

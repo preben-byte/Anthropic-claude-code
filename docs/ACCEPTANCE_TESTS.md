@@ -1,7 +1,7 @@
 # ACCEPTANCE_TESTS — Project Jarvis
 
 Automatiserte tester ligger i `tests/` og kjøres med `pytest`.
-Status: **18/18 passerer** (Fase 0).
+Status: **20/20 passerer** (Fase 0).
 
 ## A. Identitet og konfigurasjon (implementert)
 
@@ -26,6 +26,8 @@ Status: **18/18 passerer** (Fase 0).
 | ID | Krav | Test |
 |---|---|---|
 | C1 | Uten nøkkel: mock-modus, aldri krasj | `test_voice_lab.py::test_adapter_falls_back_to_mock_without_key` |
+| C1b | Avvist nøkkel: fall tilbake til mock med advarsel, aldri krasj | `test_voice_lab.py::test_adapter_falls_back_to_mock_on_rejected_key` |
+| C1c | Gyldig nøkkel: ekte leverandøradapter velges | `test_voice_lab.py::test_adapter_uses_provider_when_key_is_valid` |
 | C2 | Gyldig WAV, mono, 24 kHz | `test_voice_lab.py::test_mock_synthesis_writes_valid_wav` |
 | C3 | 12 blindkodede kandidater A01–D03 med to kjerneprøver hver | `test_voice_lab.py::test_generates_twelve_blind_coded_candidates` |
 | C4 | Blindliste eksponerer kun blindkode + lyd (bias-kontroll) | `test_voice_lab.py::test_blind_listing_hides_variant_information` |
