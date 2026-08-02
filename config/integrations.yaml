@@ -1,0 +1,27 @@
+# Integration catalogue (Phase 5). Everything starts disabled and read-only.
+# An integration is enabled by flipping `enabled`, never by code changes.
+# Write capability additionally requires the permission model (permissions.yaml).
+
+defaults:
+  enabled: false
+  mode: read_only        # read_only | simulated | write_gated
+
+integrations:
+  home_assistant:   { enabled: false, mode: read_only }
+  mqtt:             { enabled: false, mode: read_only }
+  extremecloud_iq:  { enabled: false, mode: read_only }
+  network_switches: { enabled: false, mode: read_only }
+  wordpress:        { enabled: false, mode: read_only }
+  marivold_booking: { enabled: false, mode: read_only }
+  guest_portal:     { enabled: false, mode: read_only }
+  info_screens:     { enabled: false, mode: read_only }
+  email:            { enabled: false, mode: read_only }
+  calendar:         { enabled: false, mode: read_only }
+  google_drive:     { enabled: false, mode: read_only }
+  github:           { enabled: false, mode: read_only }
+  local_files:      { enabled: false, mode: read_only }
+  n8n:              { enabled: false, mode: read_only }
+  stripe:           { enabled: false, mode: read_only }   # drafts and status only
+  hikvision_cctv:   { enabled: false, mode: read_only }   # restricted data; never to cloud models
+  weather_web:      { enabled: false, mode: read_only }
+  tasks_notifications: { enabled: false, mode: read_only }

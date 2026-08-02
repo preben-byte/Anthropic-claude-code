@@ -1,0 +1,29 @@
+# Routing policy (Phase 3, brief §8.4). Hard gates run before scoring;
+# privacy is a gate, never just a score.
+
+hard_gates:
+  - data_classification_and_retention_policy
+  - required_modality
+  - context_window
+  - tool_support
+  - provider_status
+  - user_explicit_model_choice
+  - cost_limit
+
+scoring:
+  - task_quality
+  - measured_eval_result
+  - latency
+  - stability
+  - cost
+  - tool_fit
+
+sensitivity_policy:
+  public: any_approved_model
+  internal: approved_models_after_policy_check
+  confidential: redact_or_use_other_approved_model   # not Fable 5 unredacted
+  restricted: local_model_or_approved_zdr_only       # never Fable 5, never CCTV/guest data to cloud
+
+fallback:
+  same_or_stricter_privacy_only: true
+  log_and_show_model_switch: true

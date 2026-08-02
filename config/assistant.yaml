@@ -1,0 +1,18 @@
+# Assistant identity.
+#
+# "Jarvis" is a working name. Rename the assistant by editing this file only:
+# no code change, no rebuild, and the voice identity (config/voices.yaml +
+# config/voice_manifest.json) is untouched by a rename.
+#
+# wake_word is what the local wake-word engine listens for. It is deliberately
+# separate from assistant_name so the two can differ (e.g. a name that is hard
+# to detect acoustically can keep a different trigger phrase).
+
+assistant_name: Jarvis
+wake_word: Jarvis
+wake_word_aliases:
+  - Hey Jarvis
+  - OK Jarvis
+
+# How the assistant addresses Preben in speech: preben | sir | none
+address_style: none

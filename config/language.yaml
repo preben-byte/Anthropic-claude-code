@@ -1,0 +1,27 @@
+# Language policy (master brief §7, as amended 2026-08-02).
+#
+# Preben must always be able to speak Norwegian bokmål to the system, so STT
+# and language understanding are optimised for Norwegian. The assistant always
+# replies aloud in natural British English, regardless of the language Preben
+# uses. Norwegian names, places and technical terms must be pronounced
+# correctly inside English sentences (see config/pronunciation.yaml). The
+# assistant does not reply in Norwegian unless Preben explicitly asks for it.
+
+listen:
+  # STT is optimised for Norwegian bokmål.
+  primary_language: nb-NO
+  secondary_languages:
+    - en-GB
+  # Conservative: English technical words inside a Norwegian sentence must not
+  # flip the detected conversation language.
+  auto_language_switch: conservative
+
+speak:
+  # Spoken replies are always natural British English…
+  language: en-GB
+  # …unless Preben explicitly asks for a Norwegian reply, and then only for
+  # the scope he asked for (single reply or until revoked).
+  reply_in_norwegian: on_explicit_request_only
+  # Norwegian proper nouns and terms inside English sentences use the
+  # pronunciation lexicon; spelling in data and logs is never changed for it.
+  norwegian_pronunciation: lexicon

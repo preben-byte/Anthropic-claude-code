@@ -1,0 +1,24 @@
+# Secrets — never commit
+.env.local
+.env
+*.key
+secrets/
+
+# Python
+__pycache__/
+*.pyc
+*.egg-info/
+.venv/
+.pytest_cache/
+dist/
+build/
+
+# Voice lab output (generated audio, local only)
+var/
+*.wav
+*.mp3
+
+# OS / editor
+.DS_Store
+.idea/
+.vscode/
