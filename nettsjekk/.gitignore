@@ -1,0 +1,6 @@
+# Rapporter og logger som skriptene lager – skal ikke inn i git
+nettsjekk-rapport-*
+roaming-logg-*
+ap-status-*/
+# Din egen AP-liste med ekte IP-adresser (bruk ap-liste.eksempel.txt som mal)
+ap-liste.txt
