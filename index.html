@@ -1,0 +1,1106 @@
+<!doctype html>
+<html lang="nb">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+<meta name="theme-color" content="#0f2a2e" />
+<title>Marivold Gjesteportal</title>
+<link rel="icon" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'><rect width='64' height='64' rx='14' fill='%230f2a2e'/><path d='M14 44 L24 22 L32 36 L40 22 L50 44' stroke='%23e8d9b0' stroke-width='4' fill='none' stroke-linecap='round' stroke-linejoin='round'/></svg>" />
+<style>
+:root{
+  --bg:#f6f2ec;--card:#ffffff;--ink:#0f2a2e;--muted:#5f6b6d;
+  --brand:#0f2a2e;--brand-2:#264a4e;--accent:#c98b3c;--gold:#e8d9b0;
+  --line:#e6dfd2;--good:#2f7a58;--warn:#b45b1a;--danger:#a83232;
+  --radius:14px;--shadow:0 8px 30px rgba(15,42,46,.08);
+  --font:-apple-system,BlinkMacSystemFont,"Segoe UI",Inter,Roboto,Helvetica,Arial,sans-serif;
+  --serif:"Cormorant Garamond",Georgia,"Times New Roman",serif;
+}
+@media (prefers-color-scheme: dark){
+  :root{--bg:#0b1a1c;--card:#122528;--ink:#f2ece0;--muted:#a9b3b5;--line:#1e3437;--brand:#e8d9b0;--brand-2:#c98b3c;--shadow:0 8px 30px rgba(0,0,0,.4);}
+}
+:root[data-theme="dark"]{--bg:#0b1a1c;--card:#122528;--ink:#f2ece0;--muted:#a9b3b5;--line:#1e3437;--brand:#e8d9b0;--brand-2:#c98b3c;--shadow:0 8px 30px rgba(0,0,0,.4);}
+:root[data-theme="light"]{--bg:#f6f2ec;--card:#ffffff;--ink:#0f2a2e;--muted:#5f6b6d;--line:#e6dfd2;--brand:#0f2a2e;--brand-2:#264a4e;--shadow:0 8px 30px rgba(15,42,46,.08);}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family:var(--font);-webkit-font-smoothing:antialiased;line-height:1.5}
+img{max-width:100%;display:block}
+a{color:inherit}
+button{font:inherit;color:inherit;cursor:pointer}
+h1,h2,h3,h4{font-family:var(--serif);font-weight:600;letter-spacing:.2px;margin:0 0 .4em}
+h1{font-size:clamp(28px,4vw,44px);line-height:1.1}
+h2{font-size:clamp(22px,3vw,32px)}
+h3{font-size:20px}
+p{margin:.4em 0}
+.container{max-width:1180px;margin:0 auto;padding:0 20px}
+.grid{display:grid;gap:18px}
+.hidden{display:none !important}
+.badge{display:inline-block;padding:3px 10px;border-radius:999px;background:var(--gold);color:var(--brand);font-size:12px;font-weight:600;letter-spacing:.3px}
+.pill{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;border-radius:999px;border:1px solid var(--line);font-size:12px;color:var(--muted)}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:11px 18px;border-radius:12px;border:1px solid transparent;background:var(--brand);color:#fff;font-weight:600;transition:.15s ease}
+:root[data-theme="dark"] .btn{color:var(--bg)}
+.btn:hover{transform:translateY(-1px)}
+.btn.secondary{background:transparent;color:var(--ink);border-color:var(--line)}
+.btn.gold{background:var(--accent);color:#fff}
+.btn.ghost{background:transparent;border-color:transparent;color:var(--brand-2);padding:8px 10px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);overflow:hidden}
+.card .pad{padding:22px}
+
+/* ---------- Top bar ---------- */
+.topbar{position:sticky;top:0;z-index:40;background:var(--bg);border-bottom:1px solid var(--line);backdrop-filter:saturate(160%) blur(12px)}
+.topbar .row{display:flex;align-items:center;justify-content:space-between;padding:14px 20px;max-width:1180px;margin:0 auto;gap:16px}
+.brand{display:flex;align-items:center;gap:12px;font-family:var(--serif);font-size:22px;font-weight:600;letter-spacing:1px}
+.brand .mark{width:36px;height:36px;border-radius:10px;background:var(--brand);color:var(--gold);display:grid;place-items:center;font-family:var(--serif);font-size:20px}
+:root[data-theme="dark"] .brand .mark{background:var(--gold);color:var(--bg)}
+.top-actions{display:flex;align-items:center;gap:10px}
+.icon-btn{width:38px;height:38px;border-radius:10px;background:transparent;border:1px solid var(--line);display:grid;place-items:center;transition:.15s}
+.icon-btn:hover{background:var(--card)}
+.notif{position:relative}
+.notif::after{content:"";position:absolute;top:8px;right:9px;width:8px;height:8px;border-radius:50%;background:var(--accent)}
+
+/* ---------- Language dropdown ---------- */
+.lang{position:relative}
+.lang-menu{position:absolute;right:0;top:calc(100% + 6px);background:var(--card);border:1px solid var(--line);border-radius:12px;min-width:170px;box-shadow:var(--shadow);overflow:hidden}
+.lang-menu button{width:100%;padding:10px 14px;text-align:left;display:flex;align-items:center;gap:10px;background:transparent;border:0}
+.lang-menu button:hover{background:var(--bg)}
+.flag{width:20px;height:14px;border-radius:2px;display:inline-block;box-shadow:0 0 0 1px rgba(0,0,0,.06)}
+.flag.en{background:linear-gradient(#012169 33%,#fff 33%,#fff 66%,#c8102e 66%)}
+.flag.nb{background:linear-gradient(90deg,#ba0c2f 33%,#fff 33%,#fff 40%,#00205b 40%,#00205b 60%,#fff 60%,#fff 66%,#ba0c2f 66%)}
+.flag.da{background:linear-gradient(90deg,#c8102e 40%,#fff 40%,#fff 50%,#c8102e 50%);position:relative}
+.flag.sv{background:#006aa7;position:relative}
+.flag.sv::before{content:"";position:absolute;left:6px;top:0;bottom:0;width:2px;background:#fecc00}
+.flag.sv::after{content:"";position:absolute;left:0;right:0;top:6px;height:2px;background:#fecc00}
+.flag.de{background:linear-gradient(#000 33%,#dd0000 33%,#dd0000 66%,#ffce00 66%)}
+
+/* ---------- Hero booking header ---------- */
+.hero{padding:22px 0 6px}
+.hero-card{background:linear-gradient(140deg,var(--brand),var(--brand-2));color:#f7ecd1;border-radius:20px;padding:28px 28px 24px;position:relative;overflow:hidden}
+.hero-card::after{content:"";position:absolute;inset:auto -60px -80px auto;width:280px;height:280px;background:radial-gradient(closest-side,rgba(232,217,176,.28),transparent);}
+.hero-card h1{color:#fdf5e2;margin-bottom:6px}
+.hero-card .sub{color:#e8d9b0;opacity:.9;font-size:14px;letter-spacing:.4px;text-transform:uppercase}
+.stay-meta{display:flex;flex-wrap:wrap;gap:24px 30px;margin-top:20px;font-size:14px}
+.stay-meta div span{display:block;font-size:12px;color:#e8d9b0;opacity:.75;text-transform:uppercase;letter-spacing:.5px;margin-bottom:2px}
+.stay-meta div strong{font-size:16px;color:#fdf5e2;font-weight:600}
+.hero-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.hero-actions .btn{background:var(--gold);color:var(--brand);border:0}
+.hero-actions .btn.ghost{background:transparent;color:var(--gold);border:1px solid rgba(232,217,176,.4)}
+
+/* ---------- Tab bar ---------- */
+.tabs{display:flex;gap:6px;overflow-x:auto;padding:16px 0 4px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{white-space:nowrap;padding:10px 16px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--muted);font-weight:600;font-size:14px;transition:.15s}
+.tab:hover{color:var(--ink)}
+.tab.active{background:var(--brand);color:#fff;border-color:var(--brand)}
+:root[data-theme="dark"] .tab.active{color:var(--bg)}
+
+/* ---------- Layout ---------- */
+main{padding:8px 0 60px}
+.section{display:none}
+.section.active{display:block;animation:fade .25s ease}
+@keyframes fade{from{opacity:0;transform:translateY(4px)}to{opacity:1;transform:none}}
+
+.two-col{display:grid;grid-template-columns:2fr 1fr;gap:20px}
+@media (max-width:840px){.two-col{grid-template-columns:1fr}}
+
+.quick-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:14px}
+@media (max-width:900px){.quick-grid{grid-template-columns:repeat(2,1fr)}}
+.quick{padding:18px;border-radius:14px;background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column;gap:10px;align-items:flex-start;text-align:left;transition:.15s;box-shadow:var(--shadow)}
+.quick:hover{transform:translateY(-2px)}
+.quick .ico{width:44px;height:44px;border-radius:12px;background:var(--gold);display:grid;place-items:center;color:var(--brand);font-size:22px}
+.quick h4{margin:0;font-family:var(--font);font-size:15px;font-weight:700}
+.quick p{margin:0;font-size:13px;color:var(--muted)}
+
+/* ---------- Sub-nav (for undersider) ---------- */
+.subnav{display:flex;flex-wrap:wrap;gap:8px;margin:8px 0 18px}
+.subnav button{padding:8px 14px;border-radius:999px;border:1px solid var(--line);background:var(--card);font-size:13px;font-weight:600;color:var(--muted)}
+.subnav button.active{background:var(--brand-2);color:#fff;border-color:var(--brand-2)}
+
+/* ---------- Cards & lists ---------- */
+.list-item{display:grid;grid-template-columns:88px 1fr auto;gap:14px;padding:14px;border:1px solid var(--line);border-radius:14px;background:var(--card);align-items:center;margin-bottom:10px}
+.list-item .thumb{width:88px;height:66px;border-radius:10px;background:linear-gradient(135deg,#ded1b8,#a9835a);display:grid;place-items:center;font-size:28px;color:#fff}
+.list-item h4{margin:0 0 3px;font-family:var(--font);font-size:15px;font-weight:700}
+.list-item p{margin:0;font-size:13px;color:var(--muted)}
+.list-item .meta{display:flex;gap:8px;margin-top:6px}
+
+.tile-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:14px}
+.tile{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;box-shadow:var(--shadow);cursor:pointer;transition:.15s;display:flex;flex-direction:column}
+.tile:hover{transform:translateY(-2px)}
+.tile .cover{aspect-ratio:16/10;background:linear-gradient(135deg,#96b2b4,#3f6c70);display:grid;place-items:center;color:#fff;font-size:44px}
+.tile .cover.a{background:linear-gradient(135deg,#c98b3c,#7a4d1c)}
+.tile .cover.b{background:linear-gradient(135deg,#4a7275,#0f2a2e)}
+.tile .cover.c{background:linear-gradient(135deg,#a3936a,#6b5a34)}
+.tile .cover.d{background:linear-gradient(135deg,#7fa48c,#2f5a44)}
+.tile .cover.e{background:linear-gradient(135deg,#c4a373,#8a6b3c)}
+.tile .cover.f{background:linear-gradient(135deg,#94a8b3,#48626c)}
+.tile .body{padding:14px 16px 16px;flex:1;display:flex;flex-direction:column;gap:6px}
+.tile h4{margin:0;font-family:var(--font);font-size:15px;font-weight:700}
+.tile p{margin:0;font-size:13px;color:var(--muted);flex:1}
+.tile .row{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--muted);margin-top:6px}
+.tile .price{color:var(--accent);font-weight:700;font-size:14px}
+
+/* ---------- Key card ---------- */
+.key-card{background:linear-gradient(135deg,#122528,#264a4e);color:#f7ecd1;border-radius:20px;padding:26px;position:relative;overflow:hidden}
+.key-card h3{color:#fdf5e2}
+.key-card .door-btn{margin-top:16px;background:var(--gold);color:var(--brand);border:0;padding:14px 22px;border-radius:14px;font-weight:700;font-size:16px;display:inline-flex;align-items:center;gap:10px}
+.key-card .door-btn.locked{background:#7c8a8d;color:#fff}
+.pulse{width:80px;height:80px;border-radius:50%;background:rgba(232,217,176,.15);display:grid;place-items:center;margin:14px 0}
+.pulse::before{content:"";position:absolute;width:80px;height:80px;border-radius:50%;background:rgba(232,217,176,.2);animation:pulse 2s infinite}
+@keyframes pulse{0%{transform:scale(1);opacity:.6}100%{transform:scale(2);opacity:0}}
+.key-list{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+.key-item{display:flex;justify-content:space-between;align-items:center;padding:10px 14px;background:rgba(255,255,255,.06);border-radius:10px}
+.key-item small{color:#c9c0a5}
+
+/* ---------- FAQ / accordion ---------- */
+details.faq{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 18px;margin-bottom:8px}
+details.faq summary{cursor:pointer;font-weight:600;list-style:none;display:flex;justify-content:space-between}
+details.faq summary::after{content:"+";font-size:22px;color:var(--muted);transition:.2s}
+details.faq[open] summary::after{transform:rotate(45deg)}
+details.faq p{margin-top:10px;color:var(--muted)}
+
+/* ---------- Weather ---------- */
+.weather{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;padding:16px;border-radius:14px;background:linear-gradient(135deg,#dae7ea,#f7f1e3);color:#0f2a2e}
+:root[data-theme="dark"] .weather{background:linear-gradient(135deg,#1c3134,#3e2f18);color:#f2ece0}
+.weather .big{font-family:var(--serif);font-size:44px;line-height:1}
+.weather small{color:var(--muted)}
+
+/* ---------- Chat ---------- */
+.chat{display:flex;flex-direction:column;gap:8px;padding:16px;background:var(--card);border:1px solid var(--line);border-radius:14px;min-height:280px}
+.msg{max-width:75%;padding:9px 14px;border-radius:14px;font-size:14px}
+.msg.them{align-self:flex-start;background:var(--bg);border:1px solid var(--line)}
+.msg.me{align-self:flex-end;background:var(--brand);color:#fff}
+:root[data-theme="dark"] .msg.me{color:var(--bg)}
+.msg small{display:block;font-size:11px;opacity:.65;margin-top:3px}
+.chat-input{display:flex;gap:8px;margin-top:8px}
+.chat-input input{flex:1;padding:11px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-family:var(--font)}
+.chat-input button{padding:0 18px;border-radius:12px;border:0;background:var(--brand);color:#fff}
+:root[data-theme="dark"] .chat-input button{color:var(--bg)}
+
+/* ---------- Feedback / NPS ---------- */
+.nps{display:flex;flex-wrap:wrap;gap:6px;margin:14px 0}
+.nps button{width:42px;height:42px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-weight:700}
+.nps button.selected{background:var(--brand);color:#fff;border-color:var(--brand)}
+:root[data-theme="dark"] .nps button.selected{color:var(--bg)}
+.stars{font-size:34px;letter-spacing:6px;color:#d8c8a2;cursor:pointer;user-select:none}
+.stars span.on{color:var(--accent)}
+textarea.field{width:100%;min-height:100px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-family:var(--font);resize:vertical}
+
+/* ---------- Shop ---------- */
+.cart-count{background:var(--accent);color:#fff;border-radius:999px;padding:1px 8px;font-size:11px;font-weight:700;margin-left:8px}
+.qty{display:inline-flex;align-items:center;gap:0;border:1px solid var(--line);border-radius:10px;overflow:hidden}
+.qty button{width:34px;height:34px;background:var(--card);border:0}
+.qty span{min-width:28px;text-align:center;font-weight:700}
+
+/* ---------- Timeline (reise-tidslinje) ---------- */
+.timeline{position:relative;margin:20px 0;padding-left:28px}
+.timeline::before{content:"";position:absolute;left:11px;top:6px;bottom:6px;width:2px;background:var(--line)}
+.step{position:relative;padding:6px 0 22px 8px}
+.step::before{content:"";position:absolute;left:-22px;top:8px;width:16px;height:16px;border-radius:50%;background:var(--card);border:2px solid var(--muted)}
+.step.done::before{background:var(--good);border-color:var(--good)}
+.step.now::before{background:var(--accent);border-color:var(--accent);box-shadow:0 0 0 4px rgba(201,139,60,.18)}
+.step h4{margin:0 0 3px;font-family:var(--font);font-size:15px;font-weight:700}
+.step p{margin:0;color:var(--muted);font-size:13px}
+
+/* ---------- Modal ---------- */
+.modal-back{position:fixed;inset:0;background:rgba(15,42,46,.55);backdrop-filter:blur(3px);display:none;align-items:flex-end;justify-content:center;z-index:60;padding:0}
+.modal-back.open{display:flex}
+.modal{background:var(--card);width:100%;max-width:640px;max-height:88vh;overflow-y:auto;border-radius:20px 20px 0 0;padding:24px 24px 30px}
+@media(min-width:700px){.modal-back{align-items:center;padding:20px}.modal{border-radius:20px}}
+.modal .close{position:sticky;top:0;float:right;background:transparent;border:0;font-size:24px;color:var(--muted)}
+.modal h2{margin-top:0}
+.modal .cover-big{aspect-ratio:16/9;border-radius:14px;background:linear-gradient(135deg,#96b2b4,#3f6c70);margin:6px 0 14px;display:grid;place-items:center;color:#fff;font-size:64px}
+
+/* ---------- Footer ---------- */
+.footer{border-top:1px solid var(--line);padding:26px 0 40px;color:var(--muted);font-size:13px;text-align:center}
+.footer .powered{margin-top:6px;opacity:.7}
+
+/* ---------- Utilities ---------- */
+.row-between{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.stack{display:flex;flex-direction:column;gap:10px}
+.chip{display:inline-block;padding:3px 10px;border-radius:999px;background:var(--bg);border:1px solid var(--line);font-size:12px;color:var(--muted);margin-right:5px}
+
+/* Map placeholder */
+.map{aspect-ratio:16/8;border-radius:14px;background:
+  radial-gradient(ellipse at 30% 40%, #7fa48c 0%, transparent 40%),
+  radial-gradient(ellipse at 70% 60%, #c4a373 0%, transparent 45%),
+  linear-gradient(135deg,#dae7ea,#f7f1e3);position:relative;overflow:hidden;border:1px solid var(--line)}
+.map .pin{position:absolute;width:24px;height:24px;border-radius:50% 50% 50% 0;background:var(--accent);transform:rotate(-45deg);box-shadow:0 4px 10px rgba(0,0,0,.25)}
+.map .pin::after{content:"";position:absolute;left:6px;top:6px;width:12px;height:12px;border-radius:50%;background:#fff}
+</style>
+</head>
+<body>
+
+<!-- ============ TOP BAR ============ -->
+<header class="topbar">
+  <div class="row">
+    <a class="brand" href="#hjem" onclick="go('hjem')">
+      <span class="mark">M</span>
+      <span>MARIVOLD</span>
+    </a>
+    <div class="top-actions">
+      <button class="icon-btn notif" title="Varsler" onclick="alert('Ingen nye varsler')">🔔</button>
+      <div class="lang">
+        <button class="icon-btn" id="langToggle" title="Språk" onclick="toggleLang(event)">🌐</button>
+        <div class="lang-menu hidden" id="langMenu">
+          <button onclick="setLang('nb')"><span class="flag nb"></span> Norsk</button>
+          <button onclick="setLang('en')"><span class="flag en"></span> English</button>
+          <button onclick="setLang('da')"><span class="flag da"></span> Dansk</button>
+          <button onclick="setLang('sv')"><span class="flag sv"></span> Svenska</button>
+          <button onclick="setLang('de')"><span class="flag de"></span> Deutsch</button>
+        </div>
+      </div>
+      <button class="icon-btn" title="Bytt tema" onclick="toggleTheme()">🌓</button>
+    </div>
+  </div>
+</header>
+
+<div class="container">
+
+  <!-- ============ HERO / BOOKING ============ -->
+  <section class="hero">
+    <div class="hero-card">
+      <span class="badge">Booking bekreftet</span>
+      <h1 data-i18n="hero.title">Velkommen til Marivold, Ingrid</h1>
+      <p class="sub" data-i18n="hero.sub">Vi gleder oss til å ta imot deg</p>
+
+      <div class="stay-meta">
+        <div><span data-i18n="hero.checkin">Ankomst</span><strong>Fre 10. juli · 15:00</strong></div>
+        <div><span data-i18n="hero.checkout">Avreise</span><strong>Søn 12. juli · 11:00</strong></div>
+        <div><span data-i18n="hero.room">Bolig</span><strong>Sjøhus 4 · Havutsikt</strong></div>
+        <div><span data-i18n="hero.guests">Gjester</span><strong>2 voksne · 1 barn</strong></div>
+        <div><span data-i18n="hero.ref">Bookingref</span><strong>MRV-2726315</strong></div>
+      </div>
+
+      <div class="hero-actions">
+        <button class="btn" onclick="go('nokkel')">Åpne digital nøkkel</button>
+        <button class="btn ghost" onclick="go('info')">Praktisk info</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ TABS ============ -->
+  <nav class="tabs" id="tabs">
+    <button class="tab active" data-tab="hjem" onclick="go('hjem')">🏡 Hjem</button>
+    <button class="tab" data-tab="nokkel" onclick="go('nokkel')">🔑 Digital nøkkel</button>
+    <button class="tab" data-tab="opphold" onclick="go('opphold')">🛏️ Ditt opphold</button>
+    <button class="tab" data-tab="opplevelser" onclick="go('opplevelser')">🌲 Opplevelser</button>
+    <button class="tab" data-tab="shop" onclick="go('shop')">🛒 Shop <span id="cartBadge" class="cart-count hidden">0</span></button>
+    <button class="tab" data-tab="info" onclick="go('info')">ℹ️ Praktisk info</button>
+    <button class="tab" data-tab="kontakt" onclick="go('kontakt')">💬 Kontakt</button>
+    <button class="tab" data-tab="tilbakemelding" onclick="go('tilbakemelding')">⭐ Tilbakemelding</button>
+  </nav>
+
+  <main>
+
+  <!-- ================================================================
+       SECTION: HJEM / FORSIDE
+  ================================================================= -->
+  <section class="section active" id="sec-hjem">
+    <div class="two-col">
+      <div>
+        <h2>Din reise fra dør til dør</h2>
+        <p style="color:var(--muted);max-width:60ch">
+          Alt du trenger for oppholdet er samlet her – digital nøkkel, praktisk informasjon,
+          lokale opplevelser og direkte kontakt med verten. Vi ønsker at du skal føle deg
+          hjemme fra det øyeblikket du kommer.
+        </p>
+
+        <div class="quick-grid" style="margin-top:18px">
+          <button class="quick" onclick="openSubInfo2('ankomst')">
+            <div class="ico">🚗</div>
+            <h4>Ankomst</h4>
+            <p>Veibeskrivelse, kart og parkering.</p>
+          </button>
+          <button class="quick" onclick="go('nokkel')">
+            <div class="ico">🔑</div>
+            <h4>Digital nøkkel</h4>
+            <p>Åpne dør og fellesarealer rett fra telefonen.</p>
+          </button>
+          <button class="quick" onclick="go('opplevelser')">
+            <div class="ico">🌲</div>
+            <h4>Opplevelser</h4>
+            <p>Aktiviteter, severdigheter og turer i nærområdet.</p>
+          </button>
+          <button class="quick" onclick="go('shop')">
+            <div class="ico">🥐</div>
+            <h4>Frokost & Shop</h4>
+            <p>Bestill frokost, spa og ekstra tjenester.</p>
+          </button>
+          <button class="quick" onclick="go('info')">
+            <div class="ico">📶</div>
+            <h4>WiFi & Info</h4>
+            <p>Passord, husregler, parkering og FAQ.</p>
+          </button>
+          <button class="quick" onclick="go('kontakt')">
+            <div class="ico">💬</div>
+            <h4>Meldinger</h4>
+            <p>Chat direkte med verten din.</p>
+          </button>
+          <button class="quick" onclick="openSubOpplevelser('restauranter')">
+            <div class="ico">🍽️</div>
+            <h4>Restauranter</h4>
+            <p>Våre anbefalinger i nærheten.</p>
+          </button>
+          <button class="quick" onclick="go('tilbakemelding')">
+            <div class="ico">⭐</div>
+            <h4>Gi en vurdering</h4>
+            <p>Fortell oss hvordan du har det.</p>
+          </button>
+        </div>
+
+        <h3 style="margin-top:28px">Dagens anbefalinger</h3>
+        <div class="tile-grid">
+          <div class="tile" onclick="openDetail('rib')">
+            <div class="cover b">🚤</div>
+            <div class="body">
+              <h4>RIB-tur til fyret</h4>
+              <p>2 timer langs skjærgården med lokal guide.</p>
+              <div class="row"><span>90 min · I dag 16:00</span><span class="price">790 kr</span></div>
+            </div>
+          </div>
+          <div class="tile" onclick="openDetail('sauna')">
+            <div class="cover a">🧖</div>
+            <div class="body">
+              <h4>Flytende badstue</h4>
+              <p>Privat badstue på sjøen med utsikt til holmene.</p>
+              <div class="row"><span>90 min · Booking</span><span class="price">590 kr</span></div>
+            </div>
+          </div>
+          <div class="tile" onclick="openDetail('frokost')">
+            <div class="cover c">🥐</div>
+            <div class="body">
+              <h4>Marivold-frokost</h4>
+              <p>Levert til hytta kl 08:30 – lokale råvarer.</p>
+              <div class="row"><span>Bestilles innen 20:00</span><span class="price">245 kr / pers</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <aside class="stack">
+        <div class="card">
+          <div class="pad">
+            <h3 style="margin-top:0">Været i Marivold</h3>
+            <div class="weather">
+              <div class="big">17°</div>
+              <div>
+                <strong>Lett skyet · Sørvestlig bris 4 m/s</strong><br>
+                <small>Sol opp 04:32 · Sol ned 22:41</small>
+              </div>
+            </div>
+            <div class="row-between" style="margin-top:10px;font-size:13px;color:var(--muted)">
+              <span>I morgen ☀️ 21°</span><span>Søndag 🌦️ 15°</span><span>Mandag ⛅ 18°</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="pad">
+            <h3 style="margin-top:0">Din tidslinje</h3>
+            <div class="timeline">
+              <div class="step done"><h4>Booking bekreftet</h4><p>13. juni – kvittering sendt</p></div>
+              <div class="step done"><h4>Digital velkomst sendt</h4><p>3 dager før ankomst</p></div>
+              <div class="step now"><h4>Digital nøkkel aktiveres</h4><p>Fre 10. juli kl 14:00 – gå rett til boligen</p></div>
+              <div class="step"><h4>Utsjekk</h4><p>Søn 12. juli kl 11:00 – ingen resepsjon</p></div>
+              <div class="step"><h4>Tilbakemelding</h4><p>Kort spørsmål etter opphold</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="pad">
+            <h3 style="margin-top:0">Nødtelefon</h3>
+            <p style="color:var(--muted);margin:0 0 10px">Nødtjenester og døgnvakt hos Marivold.</p>
+            <button class="btn secondary" style="width:100%">🚨 Ring vaktnummer +47 918 20 000</button>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       SECTION: DIGITAL NØKKEL
+  ================================================================= -->
+  <section class="section" id="sec-nokkel">
+    <h2>Din digitale nøkkel</h2>
+    <p style="color:var(--muted);max-width:70ch">
+      Nøklene aktiveres automatisk ved ankomst og deaktiveres ved avreise – ingen innsjekk nødvendig.
+      Trykk «Åpne dør» innen 3 meter fra låsen.
+    </p>
+
+    <div class="two-col" style="margin-top:12px">
+      <div class="key-card">
+        <span class="badge">Aktiv fra fre 14:00</span>
+        <h3 style="margin-top:10px">Sjøhus 4 – Hoveddør</h3>
+        <div class="pulse">🔑</div>
+        <button class="door-btn" onclick="unlockDoor(this)">🔓 Åpne dør</button>
+
+        <div class="key-list">
+          <div class="key-item"><span>🚪 Hovedinngang tunet</span><small>Tilgjengelig 24/7</small></div>
+          <div class="key-item"><span>🧖 Badstuebrygga</span><small>07–23</small></div>
+          <div class="key-item"><span>🚲 Sykkelbod</span><small>24/7</small></div>
+          <div class="key-item"><span>🅿️ Parkeringsbom</span><small>Skann QR ved bom</small></div>
+          <div class="key-item"><span>🧺 Vaskerom</span><small>08–22</small></div>
+        </div>
+      </div>
+
+      <aside class="stack">
+        <div class="card"><div class="pad">
+          <h3 style="margin-top:0">Problemer med å åpne?</h3>
+          <ol style="color:var(--muted);padding-left:18px;margin:0 0 12px">
+            <li>Sørg for at Bluetooth er på.</li>
+            <li>Hold telefonen 10–30 cm fra låsens sensor.</li>
+            <li>Trykk «Åpne dør» én gang og vent 2 sekunder.</li>
+            <li>Prøv å oppdatere siden hvis nøkkelen ikke vises.</li>
+          </ol>
+          <button class="btn secondary" style="width:100%" onclick="go('kontakt')">💬 Kontakt vert</button>
+        </div></div>
+
+        <div class="card"><div class="pad">
+          <h3 style="margin-top:0">Del nøkkel</h3>
+          <p style="color:var(--muted);margin:0 0 10px">Send en midlertidig nøkkel til en medreisende.</p>
+          <div class="row-between" style="gap:8px">
+            <input class="field" placeholder="Mobilnummer eller e-post" style="flex:1;padding:11px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink)">
+            <button class="btn">Send</button>
+          </div>
+        </div></div>
+
+        <div class="card"><div class="pad">
+          <h3 style="margin-top:0">Historikk</h3>
+          <div style="color:var(--muted);font-size:13px">
+            <div class="row-between" style="padding:6px 0"><span>Hoveddør åpnet</span><span>i dag 09:14</span></div>
+            <div class="row-between" style="padding:6px 0"><span>Sykkelbod åpnet</span><span>i går 17:02</span></div>
+            <div class="row-between" style="padding:6px 0"><span>Hoveddør åpnet</span><span>i går 15:11</span></div>
+          </div>
+        </div></div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       SECTION: DITT OPPHOLD
+  ================================================================= -->
+  <section class="section" id="sec-opphold">
+    <h2>Ditt opphold – Sjøhus 4</h2>
+
+    <div class="tile" style="cursor:default">
+      <div class="cover b" style="aspect-ratio:16/6;font-size:64px">🏡</div>
+      <div class="body">
+        <h4>Sjøhus 4 · Havutsikt · 62 m²</h4>
+        <p>To soverom, stue med panoramavindu, kjøkken, bad med badekar og privat brygge. Sover 5 personer.</p>
+        <div style="margin-top:8px">
+          <span class="chip">Havutsikt</span>
+          <span class="chip">Egen brygge</span>
+          <span class="chip">Peis</span>
+          <span class="chip">Smart-TV</span>
+          <span class="chip">Oppvaskmaskin</span>
+          <span class="chip">Vaskemaskin</span>
+          <span class="chip">Kaffemaskin</span>
+          <span class="chip">Ekstra seng</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="two-col" style="margin-top:18px">
+      <div class="stack">
+        <div class="card"><div class="pad">
+          <h3 style="margin-top:0">Ombord i boligen</h3>
+          <details class="faq" open><summary>Termostat & varme</summary><p>Alle rom har smart termostat. Anbefalt 21° på dagtid, 18° natt. Åpne appen på veggen ved inngangen for oversikt.</p></details>
+          <details class="faq"><summary>TV & streaming</summary><p>Smart-TV med gjestemodus – logg inn med egen konto for Netflix, HBO, Viaplay, NRK. Loggen slettes ved utsjekk.</p></details>
+          <details class="faq"><summary>Peisen</summary><p>Ferdig opplagt ved. Bruk kun tørt trevirke fra boden. Lukk luftespjeldet før du legger deg.</p></details>
+          <details class="faq"><summary>Kaffemaskin</summary><p>Espresso og filter i skuffen. Nye bønner koster 50 kr og bestilles via Shop.</p></details>
+          <details class="faq"><summary>Sengetøy & håndklær</summary><p>Skiftes annenhver dag – legg brukte håndklær på gulvet på badet.</p></details>
+        </div></div>
+
+        <div class="card"><div class="pad">
+          <h3 style="margin-top:0">Fasiliteter på tunet</h3>
+          <div class="tile-grid">
+            <div class="tile" onclick="openDetail('sauna')">
+              <div class="cover a">🧖</div>
+              <div class="body"><h4>Flytende badstue</h4><p>Booking gjennom Shop.</p></div>
+            </div>
+            <div class="tile" onclick="openDetail('brygge')">
+              <div class="cover b">⛵</div>
+              <div class="body"><h4>Privat brygge</h4><p>Plass til båt inntil 22 fot.</p></div>
+            </div>
+            <div class="tile" onclick="openDetail('lekeomraade')">
+              <div class="cover d">🎡</div>
+              <div class="body"><h4>Lekeområde</h4><p>Trampoline, husker og bålpanne.</p></div>
+            </div>
+            <div class="tile" onclick="openDetail('vaskeri')">
+              <div class="cover f">🧺</div>
+              <div class="body"><h4>Fellesvaskeri</h4><p>Åpent 08–22.</p></div>
+            </div>
+          </div>
+        </div></div>
+      </div>
+
+      <aside class="stack">
+        <div class="card"><div class="pad">
+          <h3 style="margin-top:0">Din bookingoversikt</h3>
+          <div class="row-between" style="padding:6px 0;font-size:14px"><span style="color:var(--muted)">Bookingref.</span><strong>MRV-2726315</strong></div>
+          <div class="row-between" style="padding:6px 0;font-size:14px"><span style="color:var(--muted)">Nætter</span><strong>2</strong></div>
+          <div class="row-between" style="padding:6px 0;font-size:14px"><span style="color:var(--muted)">Voksne</span><strong>2</strong></div>
+          <div class="row-between" style="padding:6px 0;font-size:14px"><span style="color:var(--muted)">Barn</span><strong>1 (6 år)</strong></div>
+          <div class="row-between" style="padding:6px 0;font-size:14px"><span style="color:var(--muted)">Betalt</span><strong>4 890 kr</strong></div>
+          <button class="btn secondary" style="width:100%;margin-top:10px">📄 Last ned kvittering</button>
+        </div></div>
+
+        <div class="card"><div class="pad">
+          <h3 style="margin-top:0">Forleng oppholdet</h3>
+          <p style="color:var(--muted);margin:0 0 10px">Fri kapasitet neste natt. Forleng med 1 natt for 2 195 kr.</p>
+          <button class="btn gold" style="width:100%">Forleng til 13. juli</button>
+        </div></div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       SECTION: OPPLEVELSER
+  ================================================================= -->
+  <section class="section" id="sec-opplevelser">
+    <h2>Opplevelser i Marivold</h2>
+    <p style="color:var(--muted);max-width:70ch">Håndplukkede opplevelser fra oss og våre partnere. Bestill direkte i portalen.</p>
+
+    <div class="subnav" id="oppSubnav">
+      <button class="active" data-sub="aktiviteter" onclick="openSubOpplevelser('aktiviteter')">🚤 Aktiviteter</button>
+      <button data-sub="restauranter" onclick="openSubOpplevelser('restauranter')">🍽️ Restauranter</button>
+      <button data-sub="severdigheter" onclick="openSubOpplevelser('severdigheter')">🏞️ Severdigheter</button>
+      <button data-sub="turer" onclick="openSubOpplevelser('turer')">🥾 Turer</button>
+      <button data-sub="familie" onclick="openSubOpplevelser('familie')">👨‍👩‍👧 Familie</button>
+      <button data-sub="kart" onclick="openSubOpplevelser('kart')">🗺️ Kart</button>
+    </div>
+
+    <!-- Aktiviteter -->
+    <div id="opp-aktiviteter" class="opp-sub">
+      <div class="tile-grid">
+        <div class="tile" onclick="openDetail('rib')"><div class="cover b">🚤</div><div class="body"><h4>RIB-tur til fyret</h4><p>Fartsfylt tur i skjærgården med lokal guide.</p><div class="row"><span>90 min</span><span class="price">790 kr</span></div></div></div>
+        <div class="tile" onclick="openDetail('kajakk')"><div class="cover d">🛶</div><div class="body"><h4>Havkajakk-utleie</h4><p>Enkel- eller dobbel kajakk. Redningsvest inkludert.</p><div class="row"><span>Fra 2 timer</span><span class="price">395 kr</span></div></div></div>
+        <div class="tile" onclick="openDetail('sauna')"><div class="cover a">🧖</div><div class="body"><h4>Flytende badstue</h4><p>Privat badstue på sjøen. Håndkle og øl inkludert.</p><div class="row"><span>90 min</span><span class="price">590 kr</span></div></div></div>
+        <div class="tile" onclick="openDetail('fiske')"><div class="cover f">🎣</div><div class="body"><h4>Fisketur med skipper</h4><p>Torsk og makrell i sikte. Utstyr inkludert.</p><div class="row"><span>3 timer</span><span class="price">1 290 kr</span></div></div></div>
+        <div class="tile" onclick="openDetail('sup')"><div class="cover e">🏄</div><div class="body"><h4>SUP-brett</h4><p>Padlebrett med gratis intro på bryggen.</p><div class="row"><span>2 timer</span><span class="price">295 kr</span></div></div></div>
+        <div class="tile" onclick="openDetail('ridning')"><div class="cover c">🐴</div><div class="body"><h4>Ridetur langs stranda</h4><p>Rolige hester for alle nivå.</p><div class="row"><span>90 min</span><span class="price">690 kr</span></div></div></div>
+      </div>
+    </div>
+
+    <!-- Restauranter -->
+    <div id="opp-restauranter" class="opp-sub hidden">
+      <div class="tile-grid">
+        <div class="tile" onclick="openDetail('havbua')"><div class="cover b">🦞</div><div class="body"><h4>Havbua Bistro</h4><p>Sjømatrestaurant på egen brygge. 4 min gange.</p><div class="row"><span>★★★★★ 4.8</span><span class="price">$$$</span></div></div></div>
+        <div class="tile" onclick="openDetail('bakeriet')"><div class="cover c">🥐</div><div class="body"><h4>Marivold Bakeri</h4><p>Nybakt brød, kanelboller og kaffe fra 07:00.</p><div class="row"><span>★★★★☆ 4.5</span><span class="price">$</span></div></div></div>
+        <div class="tile" onclick="openDetail('trattoria')"><div class="cover a">🍝</div><div class="body"><h4>Trattoria Solveig</h4><p>Italiensk med lokale råvarer, vedfyrt pizza.</p><div class="row"><span>★★★★☆ 4.6</span><span class="price">$$</span></div></div></div>
+        <div class="tile" onclick="openDetail('kro')"><div class="cover e">🍺</div><div class="body"><h4>Kroa på hjørnet</h4><p>Klassisk husmannskost og lokal kraftøl.</p><div class="row"><span>★★★★☆ 4.4</span><span class="price">$$</span></div></div></div>
+        <div class="tile" onclick="openDetail('kafeen')"><div class="cover d">☕</div><div class="body"><h4>Skjærgårdskafeen</h4><p>Åpen kun sommer. Barnevennlig terrasse.</p><div class="row"><span>★★★★☆ 4.3</span><span class="price">$</span></div></div></div>
+        <div class="tile" onclick="openDetail('finedining')"><div class="cover b">🍷</div><div class="body"><h4>Marivold Krone</h4><p>Tasting-meny 7 retter. Reservasjon anbefales.</p><div class="row"><span>★★★★★ 4.9</span><span class="price">$$$$</span></div></div></div>
+      </div>
+    </div>
+
+    <!-- Severdigheter -->
+    <div id="opp-severdigheter" class="opp-sub hidden">
+      <div class="tile-grid">
+        <div class="tile" onclick="openDetail('fyret')"><div class="cover b">🗼</div><div class="body"><h4>Marivold fyr</h4><p>1867. Panorama fra toppen. 30 min tur ut.</p></div></div>
+        <div class="tile" onclick="openDetail('kirke')"><div class="cover a">⛪</div><div class="body"><h4>Gamle stavkirke</h4><p>Åpen for besøkende hverdager 10–15.</p></div></div>
+        <div class="tile" onclick="openDetail('museum')"><div class="cover f">🏛️</div><div class="body"><h4>Kystmuseet</h4><p>Historien om Marivolds sjøfart og fiske.</p></div></div>
+        <div class="tile" onclick="openDetail('galleri')"><div class="cover c">🎨</div><div class="body"><h4>Galleri Kai</h4><p>Skiftende utstillinger av lokale kunstnere.</p></div></div>
+      </div>
+    </div>
+
+    <!-- Turer -->
+    <div id="opp-turer" class="opp-sub hidden">
+      <div class="tile-grid">
+        <div class="tile" onclick="openDetail('kyststi')"><div class="cover d">🥾</div><div class="body"><h4>Kyststien</h4><p>7 km langs kysten. Lett. Utsikt hele veien.</p></div></div>
+        <div class="tile" onclick="openDetail('holmene')"><div class="cover b">🏝️</div><div class="body"><h4>Holmene rundt</h4><p>Kort tur i skjærgården – perfekt med kajakk.</p></div></div>
+        <div class="tile" onclick="openDetail('varden')"><div class="cover e">⛰️</div><div class="body"><h4>Varden – toppen</h4><p>Krevende tur. 2 timer opp. 360° utsikt.</p></div></div>
+        <div class="tile" onclick="openDetail('sykkeltur')"><div class="cover c">🚴</div><div class="body"><h4>Sykkeltur bygda rundt</h4><p>15 km rundløype med bakerpause.</p></div></div>
+      </div>
+    </div>
+
+    <!-- Familie -->
+    <div id="opp-familie" class="opp-sub hidden">
+      <div class="tile-grid">
+        <div class="tile" onclick="openDetail('badeplass')"><div class="cover d">🏖️</div><div class="body"><h4>Sandbukta</h4><p>Rolig sandstrand med grunt vann.</p></div></div>
+        <div class="tile" onclick="openDetail('sommerland')"><div class="cover a">🎢</div><div class="body"><h4>Marivold Sommerland</h4><p>Klatrepark, minigolf og karuseller.</p></div></div>
+        <div class="tile" onclick="openDetail('gaard')"><div class="cover c">🐐</div><div class="body"><h4>Besøksgården</h4><p>Geiter, kaniner og traktortur.</p></div></div>
+        <div class="tile" onclick="openDetail('skattejakt')"><div class="cover e">🗺️</div><div class="body"><h4>Skattejakt for barn</h4><p>Gratis kart i resepsjonen.</p></div></div>
+      </div>
+    </div>
+
+    <!-- Kart -->
+    <div id="opp-kart" class="opp-sub hidden">
+      <h3>Alt på ett kart</h3>
+      <div class="map" style="aspect-ratio:16/9">
+        <span class="pin" style="left:20%;top:30%"></span>
+        <span class="pin" style="left:34%;top:60%"></span>
+        <span class="pin" style="left:52%;top:44%"></span>
+        <span class="pin" style="left:68%;top:24%"></span>
+        <span class="pin" style="left:78%;top:60%"></span>
+      </div>
+      <p style="color:var(--muted);font-size:13px;margin-top:10px">Trykk på en pin for detaljer. Kart oppdateres i sanntid fra kontrollpanelet vårt.</p>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       SECTION: SHOP
+  ================================================================= -->
+  <section class="section" id="sec-shop">
+    <h2>Shop & mersalg</h2>
+    <p style="color:var(--muted);max-width:70ch">Bestill frokost, spa, sengetøy-oppgradering eller ekstra tjenester direkte til boligen. Betales sammen med oppholdet.</p>
+
+    <div class="subnav">
+      <button class="active" onclick="openSubShop('frokost')">🥐 Frokost</button>
+      <button onclick="openSubShop('spa')">🧖 Spa & velvære</button>
+      <button onclick="openSubShop('ekstra')">🧺 Ekstra tjenester</button>
+      <button onclick="openSubShop('lokale')">🍯 Lokale produkter</button>
+      <button onclick="openSubShop('kurv')">🛒 Handlekurv <span id="cartBadge2" class="cart-count hidden">0</span></button>
+    </div>
+
+    <div id="shop-frokost" class="shop-sub">
+      <div class="tile-grid">
+        <div class="tile"><div class="cover c">🥐</div><div class="body"><h4>Marivold-frokost</h4><p>Klassisk buffé levert til hytta 08:30.</p><div class="row"><span class="price">245 kr / pers</span><button class="btn secondary" onclick="addToCart('Marivold-frokost',245)">+ Legg til</button></div></div></div>
+        <div class="tile"><div class="cover a">🥞</div><div class="body"><h4>Pannekake-frokost (barn)</h4><p>Kaker, bær og juice.</p><div class="row"><span class="price">95 kr / barn</span><button class="btn secondary" onclick="addToCart('Barnefrokost',95)">+ Legg til</button></div></div></div>
+        <div class="tile"><div class="cover d">🍳</div><div class="body"><h4>Herskaps-frokost</h4><p>Røkelaks, egg og lokal ost.</p><div class="row"><span class="price">395 kr / pers</span><button class="btn secondary" onclick="addToCart('Herskapsfrokost',395)">+ Legg til</button></div></div></div>
+      </div>
+    </div>
+
+    <div id="shop-spa" class="shop-sub hidden">
+      <div class="tile-grid">
+        <div class="tile"><div class="cover a">🧖</div><div class="body"><h4>Flytende badstue (90 min)</h4><p>Privat badstue for opptil 6 personer.</p><div class="row"><span class="price">590 kr</span><button class="btn secondary" onclick="addToCart('Badstue',590)">+ Book</button></div></div></div>
+        <div class="tile"><div class="cover b">💆</div><div class="body"><h4>Massasje – 60 min</h4><p>På boligen. Vår partner Marina Wellness.</p><div class="row"><span class="price">890 kr</span><button class="btn secondary" onclick="addToCart('Massasje',890)">+ Book</button></div></div></div>
+        <div class="tile"><div class="cover c">🛁</div><div class="body"><h4>Badstue + kald plunge</h4><p>Med drikke og snacks.</p><div class="row"><span class="price">790 kr</span><button class="btn secondary" onclick="addToCart('Plunge',790)">+ Book</button></div></div></div>
+      </div>
+    </div>
+
+    <div id="shop-ekstra" class="shop-sub hidden">
+      <div class="tile-grid">
+        <div class="tile"><div class="cover f">🧺</div><div class="body"><h4>Ekstra rengjøring</h4><p>Midt i oppholdet.</p><div class="row"><span class="price">450 kr</span><button class="btn secondary" onclick="addToCart('Rengjøring',450)">+ Legg til</button></div></div></div>
+        <div class="tile"><div class="cover d">🛏️</div><div class="body"><h4>Ekstra seng</h4><p>Oppredd sammenleggbar seng.</p><div class="row"><span class="price">195 kr / natt</span><button class="btn secondary" onclick="addToCart('Ekstra seng',195)">+ Legg til</button></div></div></div>
+        <div class="tile"><div class="cover a">🚗</div><div class="body"><h4>Flyplasstransfer</h4><p>Direkte fra Kjevik.</p><div class="row"><span class="price">1 490 kr</span><button class="btn secondary" onclick="addToCart('Transfer',1490)">+ Book</button></div></div></div>
+        <div class="tile"><div class="cover b">🐕</div><div class="body"><h4>Husdyravgift</h4><p>Sjekk om boligen er tilrettelagt.</p><div class="row"><span class="price">250 kr</span><button class="btn secondary" onclick="addToCart('Husdyr',250)">+ Legg til</button></div></div></div>
+      </div>
+    </div>
+
+    <div id="shop-lokale" class="shop-sub hidden">
+      <div class="tile-grid">
+        <div class="tile"><div class="cover e">🍯</div><div class="body"><h4>Honning fra Marivold</h4><p>Sommerhonning, 250 g.</p><div class="row"><span class="price">120 kr</span><button class="btn secondary" onclick="addToCart('Honning',120)">+ Kjøp</button></div></div></div>
+        <div class="tile"><div class="cover c">🍷</div><div class="body"><h4>Lokal cider</h4><p>Fra epler i Marivolds hage.</p><div class="row"><span class="price">185 kr</span><button class="btn secondary" onclick="addToCart('Cider',185)">+ Kjøp</button></div></div></div>
+        <div class="tile"><div class="cover a">🧀</div><div class="body"><h4>Ostepakke</h4><p>Tre lokale oster.</p><div class="row"><span class="price">295 kr</span><button class="btn secondary" onclick="addToCart('Ostepakke',295)">+ Kjøp</button></div></div></div>
+        <div class="tile"><div class="cover f">🍫</div><div class="body"><h4>Sjokolade – kystedition</h4><p>Med havsalt og karamell.</p><div class="row"><span class="price">89 kr</span><button class="btn secondary" onclick="addToCart('Sjokolade',89)">+ Kjøp</button></div></div></div>
+      </div>
+    </div>
+
+    <div id="shop-kurv" class="shop-sub hidden">
+      <div class="card"><div class="pad">
+        <h3 style="margin-top:0">Din handlekurv</h3>
+        <div id="cartList" style="color:var(--muted)">Kurven er tom.</div>
+        <div id="cartTotal" class="row-between" style="margin-top:14px;padding-top:14px;border-top:1px solid var(--line);font-weight:700"></div>
+        <button class="btn" style="margin-top:14px;width:100%" onclick="checkout()">Legg til på oppholdet</button>
+        <p style="color:var(--muted);font-size:12px;margin-top:8px">Alle kjøp legges direkte på oppholdet ditt og faktureres samlet ved utsjekk.</p>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       SECTION: PRAKTISK INFO
+  ================================================================= -->
+  <section class="section" id="sec-info">
+    <h2>Praktisk informasjon</h2>
+
+    <div class="subnav">
+      <button class="active" onclick="openSubInfo('wifi')">📶 WiFi</button>
+      <button onclick="openSubInfo('ankomst')">🚗 Ankomst</button>
+      <button onclick="openSubInfo('husregler')">📜 Husregler</button>
+      <button onclick="openSubInfo('parkering')">🅿️ Parkering</button>
+      <button onclick="openSubInfo('avfall')">♻️ Avfall</button>
+      <button onclick="openSubInfo('nod')">🚨 Nødinformasjon</button>
+      <button onclick="openSubInfo('faq')">❓ FAQ</button>
+      <button onclick="openSubInfo('baerekraft')">🌱 Bærekraft</button>
+    </div>
+
+    <div id="info-wifi" class="info-sub">
+      <div class="card"><div class="pad">
+        <h3 style="margin-top:0">📶 WiFi</h3>
+        <div class="row-between" style="padding:8px 0;border-bottom:1px solid var(--line)"><span>Nettverk</span><strong>Marivold-Gjest</strong></div>
+        <div class="row-between" style="padding:8px 0;border-bottom:1px solid var(--line)"><span>Passord</span><strong>havblikk2025</strong></div>
+        <div class="row-between" style="padding:8px 0;border-bottom:1px solid var(--line)"><span>Fart</span><strong>500 Mbps ned / 250 opp</strong></div>
+        <div class="row-between" style="padding:8px 0"><span>Egen QR-kode</span><button class="btn secondary" onclick="alert('QR-kode vises')">Vis QR</button></div>
+      </div></div>
+    </div>
+
+    <div id="info-ankomst" class="info-sub hidden">
+      <div class="card"><div class="pad">
+        <h3 style="margin-top:0">🚗 Ankomst & veibeskrivelse</h3>
+        <p style="color:var(--muted);margin:0 0 8px">Marivold ligger 8 minutter fra E18 – følg skiltingen mot havna. Boligen er klar fra kl 15:00 på ankomstdagen, og den digitale nøkkelen aktiveres automatisk. Gå rett til boligen – ingen resepsjon eller innsjekk nødvendig.</p>
+        <div class="map"><span class="pin" style="left:52%;top:44%"></span></div>
+        <button class="btn secondary" style="width:100%;margin-top:10px">Åpne i Google Maps</button>
+        <button class="btn secondary" style="width:100%;margin-top:6px">Åpne i Apple Kart</button>
+        <p style="color:var(--muted);font-size:13px;margin-top:12px">Utsjekk er automatisk kl 11:00 på avreisedagen – nøkkelen deaktiveres og du kan gå rett ut.</p>
+      </div></div>
+    </div>
+
+    <div id="info-husregler" class="info-sub hidden">
+      <div class="card"><div class="pad">
+        <h3 style="margin-top:0">📜 Husregler</h3>
+        <ul style="color:var(--muted);padding-left:20px">
+          <li>Ro fra 23:00 til 07:00.</li>
+          <li>Ingen røyking innendørs – kun på anviste plasser ute.</li>
+          <li>Husdyr etter avtale, må holdes i bånd på fellesarealer.</li>
+          <li>Bål kun i bålpanner. Bålforbud følges strengt.</li>
+          <li>Barn under 12 år må ha oppsyn ved bassenget og badstuen.</li>
+          <li>Meld skader og feil umiddelbart – vi hjelper deg fort.</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <div id="info-parkering" class="info-sub hidden">
+      <div class="card"><div class="pad">
+        <h3 style="margin-top:0">🅿️ Parkering</h3>
+        <p>Parkering er gratis for gjester på tunet. Registrer bilnummeret ditt her:</p>
+        <div style="display:flex;gap:8px;margin-top:10px">
+          <input class="field" placeholder="AB 12345" style="flex:1;padding:11px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink)">
+          <button class="btn">Registrer</button>
+        </div>
+        <p style="color:var(--muted);font-size:13px;margin-top:12px">Bommen åpnes automatisk med digital nøkkel.</p>
+      </div></div>
+    </div>
+
+    <div id="info-avfall" class="info-sub hidden">
+      <div class="card"><div class="pad">
+        <h3 style="margin-top:0">♻️ Avfall & resirkulering</h3>
+        <p style="color:var(--muted)">Sortering skjer i skuret ved parkeringen. Følg fargekodene:</p>
+        <ul style="color:var(--muted)">
+          <li>🟢 Grønn – matavfall</li>
+          <li>🔵 Blå – papp og papir</li>
+          <li>🟡 Gul – plastemballasje</li>
+          <li>⚫ Svart – restavfall</li>
+          <li>🍾 Panteflasker – egen kasse</li>
+        </ul>
+      </div></div>
+    </div>
+
+    <div id="info-nod" class="info-sub hidden">
+      <div class="card"><div class="pad">
+        <h3 style="margin-top:0">🚨 Nødinformasjon</h3>
+        <div class="row-between" style="padding:8px 0;border-bottom:1px solid var(--line)"><span>Politi</span><strong>112</strong></div>
+        <div class="row-between" style="padding:8px 0;border-bottom:1px solid var(--line)"><span>Ambulanse</span><strong>113</strong></div>
+        <div class="row-between" style="padding:8px 0;border-bottom:1px solid var(--line)"><span>Brann</span><strong>110</strong></div>
+        <div class="row-between" style="padding:8px 0;border-bottom:1px solid var(--line)"><span>Legevakt</span><strong>116 117</strong></div>
+        <div class="row-between" style="padding:8px 0"><span>Marivold døgnvakt</span><strong>+47 918 20 000</strong></div>
+        <div style="margin-top:14px">
+          <p style="color:var(--muted);margin:0 0 8px"><strong>Førstehjelpsutstyr</strong> finnes under vasken på kjøkkenet.</p>
+          <p style="color:var(--muted);margin:0 0 8px"><strong>Brannslukker</strong> og røykvarslere sjekket ukentlig.</p>
+          <p style="color:var(--muted);margin:0"><strong>Redningsvester</strong> henger i sjøhuset.</p>
+        </div>
+      </div></div>
+    </div>
+
+    <div id="info-faq" class="info-sub hidden">
+      <details class="faq" open><summary>Når er ankomst- og avreisetiden?</summary><p>Boligen er klar fra 15:00 og forlates innen 11:00. Den digitale nøkkelen styrer alt automatisk – ingen innsjekk nødvendig.</p></details>
+      <details class="faq"><summary>Er det tillatt med hund?</summary><p>Ja, i utvalgte boliger. Legg til «Husdyravgift» i Shop for 250 kr.</p></details>
+      <details class="faq"><summary>Kan jeg forlenge oppholdet?</summary><p>Ja – forleng direkte fra «Ditt opphold» så lenge det er ledig kapasitet.</p></details>
+      <details class="faq"><summary>Har dere ladestasjon for el-bil?</summary><p>Ja, 4 x 22 kW ladere ved parkeringen. Betales med app.</p></details>
+      <details class="faq"><summary>Hvordan betaler jeg for ekstra tjenester?</summary><p>Alt legges på oppholdet og faktureres samlet ved utsjekk.</p></details>
+      <details class="faq"><summary>Er det bassenget innendørs?</summary><p>Vi har utebasseng oppvarmet til 27° hele sesongen.</p></details>
+      <details class="faq"><summary>Kan jeg avbestille?</summary><p>Gratis avbestilling inntil 48 timer før ankomst.</p></details>
+    </div>
+
+    <div id="info-baerekraft" class="info-sub hidden">
+      <div class="card"><div class="pad">
+        <h3 style="margin-top:0">🌱 Slik jobber Marivold med bærekraft</h3>
+        <p>Vi har redusert energiforbruket vårt med 32 % siden 2022. Slik bidrar du:</p>
+        <ul style="color:var(--muted)">
+          <li>Termostaten senkes automatisk når du er ute.</li>
+          <li>Håndklær vaskes kun når du ber om det.</li>
+          <li>All strøm er 100 % fornybar.</li>
+          <li>Alle råvarer i shopen kommer fra en radius på under 30 km.</li>
+          <li>Vann fra egen brønn – drikk gjerne fra springen.</li>
+        </ul>
+      </div></div>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       SECTION: KONTAKT
+  ================================================================= -->
+  <section class="section" id="sec-kontakt">
+    <h2>Kontakt & meldinger</h2>
+    <p style="color:var(--muted);max-width:70ch">Vi er alltid til stede. Send oss en melding – vi svarer i snitt på under 10 minutter.</p>
+
+    <div class="two-col" style="margin-top:12px">
+      <div class="card"><div class="pad">
+        <h3 style="margin-top:0">💬 Live chat med verten</h3>
+        <div class="chat" id="chat">
+          <div class="msg them">Hei Ingrid! Velkommen skal du bli 🙌 Er det noe du lurer på før ankomst?<small>Marivold · 09:42</small></div>
+          <div class="msg them">Vi har ordnet ekstra putetrekk til barnet ditt.<small>Marivold · 09:43</small></div>
+        </div>
+        <div class="chat-input">
+          <input id="chatInput" placeholder="Skriv en melding..." onkeydown="if(event.key==='Enter')sendMsg()">
+          <button onclick="sendMsg()">Send</button>
+        </div>
+      </div></div>
+
+      <aside class="stack">
+        <div class="card"><div class="pad">
+          <h3 style="margin-top:0">📞 Direkte kontakt</h3>
+          <div class="row-between" style="padding:8px 0;border-bottom:1px solid var(--line)"><span>Resepsjon 08–22</span><strong>+47 918 22 000</strong></div>
+          <div class="row-between" style="padding:8px 0;border-bottom:1px solid var(--line)"><span>Døgnvakt</span><strong>+47 918 20 000</strong></div>
+          <div class="row-between" style="padding:8px 0"><span>E-post</span><strong>post@marivold.no</strong></div>
+        </div></div>
+
+        <div class="card"><div class="pad">
+          <h3 style="margin-top:0">📍 Adresse</h3>
+          <p style="margin:0">Marivold Gjestehus<br>Marivoldveien 47<br>4790 Lillesand<br>Norge</p>
+          <button class="btn secondary" style="width:100%;margin-top:12px">Åpne i kart</button>
+        </div></div>
+
+        <div class="card"><div class="pad">
+          <h3 style="margin-top:0">🔧 Meld et problem</h3>
+          <p style="color:var(--muted);margin:0 0 10px">Er noe ødelagt eller manglende? Meld inn så fikser vi det.</p>
+          <select style="width:100%;padding:11px;border-radius:10px;border:1px solid var(--line);background:var(--card);color:var(--ink);font-family:var(--font);margin-bottom:8px">
+            <option>Velg område…</option><option>Bad</option><option>Kjøkken</option><option>Soverom</option><option>Uteplass</option><option>Annet</option>
+          </select>
+          <textarea class="field" placeholder="Beskriv kort..."></textarea>
+          <button class="btn" style="width:100%;margin-top:10px">Send melding</button>
+        </div></div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ================================================================
+       SECTION: TILBAKEMELDING
+  ================================================================= -->
+  <section class="section" id="sec-tilbakemelding">
+    <h2>Fortell oss hvordan du har det</h2>
+    <p style="color:var(--muted);max-width:70ch">Din tilbakemelding hjelper oss å bli bedre. Skjemaet sendes automatisk ved utsjekk, men du kan sende den nå også.</p>
+
+    <div class="card" style="margin-top:14px"><div class="pad">
+      <h3 style="margin-top:0">Hvor sannsynlig er det at du vil anbefale Marivold til andre?</h3>
+      <p style="color:var(--muted);margin:0">NPS – 0 (ikke sannsynlig) til 10 (svært sannsynlig)</p>
+      <div class="nps" id="nps">
+        <button onclick="pickNPS(this,0)">0</button><button onclick="pickNPS(this,1)">1</button>
+        <button onclick="pickNPS(this,2)">2</button><button onclick="pickNPS(this,3)">3</button>
+        <button onclick="pickNPS(this,4)">4</button><button onclick="pickNPS(this,5)">5</button>
+        <button onclick="pickNPS(this,6)">6</button><button onclick="pickNPS(this,7)">7</button>
+        <button onclick="pickNPS(this,8)">8</button><button onclick="pickNPS(this,9)">9</button>
+        <button onclick="pickNPS(this,10)">10</button>
+      </div>
+
+      <h3>Hvordan var oppholdet ditt?</h3>
+      <div class="stars" id="stars">
+        <span onclick="pickStar(1)">★</span><span onclick="pickStar(2)">★</span><span onclick="pickStar(3)">★</span><span onclick="pickStar(4)">★</span><span onclick="pickStar(5)">★</span>
+      </div>
+
+      <h3 style="margin-top:22px">Ranger delene av oppholdet</h3>
+      <div style="display:grid;grid-template-columns:1fr auto;gap:8px 20px;align-items:center;color:var(--muted);font-size:14px">
+        <span>Ankomst-opplevelse</span><span>★★★★★</span>
+        <span>Renhold</span><span>★★★★★</span>
+        <span>Utstyr</span><span>★★★★☆</span>
+        <span>Kommunikasjon</span><span>★★★★★</span>
+        <span>Beliggenhet</span><span>★★★★★</span>
+        <span>Verdi for pengene</span><span>★★★★☆</span>
+      </div>
+
+      <h3 style="margin-top:22px">Kort kommentar (valgfritt)</h3>
+      <textarea class="field" placeholder="Skriv gjerne noen ord..."></textarea>
+
+      <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+        <button class="btn" onclick="alert('Tusen takk for tilbakemeldingen!')">Send tilbakemelding</button>
+        <button class="btn secondary">Tillat deling som Google-anmeldelse</button>
+      </div>
+    </div></div>
+  </section>
+
+  </main>
+</div>
+
+<!-- ============ MODAL ============ -->
+<div class="modal-back" id="modalBack" onclick="if(event.target.id==='modalBack')closeModal()">
+  <div class="modal" id="modalBody">
+    <button class="close" onclick="closeModal()">✕</button>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<!-- ============ FOOTER ============ -->
+<footer class="footer">
+  <div class="container">
+    <p>Marivold Gjestehus · Marivoldveien 47 · 4790 Lillesand · +47 918 22 000</p>
+    <p class="powered">Portal drevet av Marivold Guest Journey · <a href="#" onclick="alert('Personvernerklæring vises');return false">Personvern</a> · <a href="#" onclick="alert('Vilkår vises');return false">Vilkår</a> · <a href="#" onclick="if(confirm('Vil du logge ut?'))alert('Du er logget ut. Bruk lenken i SMS/e-post for å logge inn igjen.');return false">Logg ut</a></p>
+  </div>
+</footer>
+
+<script>
+/* ---------- Routing / tabs ---------- */
+const tabs = document.querySelectorAll('.tab');
+function go(id){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  const el = document.getElementById('sec-'+id);
+  if(el) el.classList.add('active');
+  tabs.forEach(t=>t.classList.toggle('active', t.dataset.tab===id));
+  window.scrollTo({top:0,behavior:'smooth'});
+  history.replaceState(null,'','#'+id);
+}
+window.addEventListener('load',()=>{
+  const h = location.hash.replace('#','');
+  if(h) go(h); else go('hjem');
+});
+
+/* ---------- Language ---------- */
+function toggleLang(e){
+  e.stopPropagation();
+  document.getElementById('langMenu').classList.toggle('hidden');
+}
+document.addEventListener('click',()=>document.getElementById('langMenu').classList.add('hidden'));
+
+const i18n = {
+  nb:{'hero.title':'Velkommen til Marivold, Ingrid','hero.sub':'Vi gleder oss til å ta imot deg','hero.checkin':'Ankomst','hero.checkout':'Avreise','hero.room':'Bolig','hero.guests':'Gjester','hero.ref':'Bookingref'},
+  en:{'hero.title':'Welcome to Marivold, Ingrid','hero.sub':"We're looking forward to hosting you",'hero.checkin':'Arrival','hero.checkout':'Departure','hero.room':'Property','hero.guests':'Guests','hero.ref':'Booking ref'},
+  da:{'hero.title':'Velkommen til Marivold, Ingrid','hero.sub':'Vi glæder os til at byde dig velkommen','hero.checkin':'Ankomst','hero.checkout':'Afrejse','hero.room':'Bolig','hero.guests':'Gæster','hero.ref':'Bookingref'},
+  sv:{'hero.title':'Välkommen till Marivold, Ingrid','hero.sub':'Vi ser fram emot att ta emot dig','hero.checkin':'Ankomst','hero.checkout':'Avresa','hero.room':'Boende','hero.guests':'Gäster','hero.ref':'Bokningsref'},
+  de:{'hero.title':'Willkommen im Marivold, Ingrid','hero.sub':'Wir freuen uns auf Ihren Besuch','hero.checkin':'Anreise','hero.checkout':'Abreise','hero.room':'Unterkunft','hero.guests':'Gäste','hero.ref':'Buchungsref'}
+};
+function setLang(l){
+  document.documentElement.lang = l;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.dataset.i18n; if(i18n[l] && i18n[l][key]) el.textContent = i18n[l][key];
+  });
+  document.getElementById('langMenu').classList.add('hidden');
+}
+
+/* ---------- Theme ---------- */
+function toggleTheme(){
+  const cur = document.documentElement.getAttribute('data-theme');
+  const next = cur==='dark' ? 'light' : (cur==='light' ? 'dark' : (matchMedia('(prefers-color-scheme: dark)').matches?'light':'dark'));
+  document.documentElement.setAttribute('data-theme', next);
+}
+
+/* ---------- Sub-nav helpers ---------- */
+function openSubOpplevelser(name){
+  document.querySelectorAll('#oppSubnav button').forEach(b=>b.classList.toggle('active', b.dataset.sub===name));
+  document.querySelectorAll('.opp-sub').forEach(el=>el.classList.add('hidden'));
+  const el = document.getElementById('opp-'+name);
+  if(el) el.classList.remove('hidden');
+  go('opplevelser');
+}
+function openSubShop(name){
+  document.querySelectorAll('#sec-shop .subnav button').forEach(b=>b.classList.remove('active'));
+  event.target.classList.add('active');
+  document.querySelectorAll('.shop-sub').forEach(el=>el.classList.add('hidden'));
+  document.getElementById('shop-'+name).classList.remove('hidden');
+}
+function openSubInfo(name){
+  document.querySelectorAll('#sec-info .subnav button').forEach(b=>{
+    b.classList.toggle('active', b.getAttribute('onclick').includes("'"+name+"'"));
+  });
+  document.querySelectorAll('.info-sub').forEach(el=>el.classList.add('hidden'));
+  document.getElementById('info-'+name).classList.remove('hidden');
+}
+function openSubInfo2(name){
+  go('info');
+  openSubInfo(name);
+}
+
+/* ---------- Modal (undersider-underside) ---------- */
+const DETAILS = {
+  rib:{cover:'🚤',title:'RIB-tur til Marivold fyr',price:'790 kr',dur:'90 minutter',desc:'Fartsfylt tur i skjærgården med lokal skipper. Vi passerer holmene og legger til ved fyret hvor du kan gå av og ta bilder. Regntøy og redningsvest inkludert. Egnet for barn fra 6 år.',includes:['Skipper','Sikkerhetsutstyr','Regntøy','Bilder']},
+  sauna:{cover:'🧖',title:'Flytende badstue på sjøen',price:'590 kr',dur:'90 minutter',desc:'Vår private badstue ligger fortøyd i skjærgården med panoramautsikt. Egen tid – ingen andre gjester. Ta med badetøy. Kaldbad direkte fra plattformen anbefales!',includes:['Håndkle','Vann','2 øl','Ved']},
+  frokost:{cover:'🥐',title:'Marivold-frokost',price:'245 kr / pers',dur:'Leveres 08:30',desc:'Ferskt brød fra bakeriet, lokal ost og skinke, eggerøre, juice, kaffe/te, frukt og syltetøy. Levert i kurv til hyttedøra.',includes:['Bestilles innen 20:00 dagen før','Vegetar-alternativ','Glutenfritt på forespørsel']},
+  kajakk:{cover:'🛶',title:'Havkajakk-utleie',price:'395 kr / 2 timer',dur:'2 eller 4 timer',desc:'Rolige og stødige kajakker for både nybegynner og erfaren. Kart over trygge ruter inkludert. Introduksjon på bryggen.',includes:['Redningsvest','Kart','Vanntett tørrpakke']},
+  fiske:{cover:'🎣',title:'Fisketur med skipper',price:'1 290 kr',dur:'3 timer',desc:'Bli med skipper Ola ut på fjorden – vi jakter torsk, sei og makrell. All utstyr og bearbeiding av fangsten inkludert.',includes:['Fiskeutstyr','Bearbeiding av fangst','Kaffe & vafler']},
+  sup:{cover:'🏄',title:'SUP-brett',price:'295 kr / 2 timer',dur:'2 timer',desc:'Stand up paddle-brett i alle størrelser. Gratis intro fra bryggen.',includes:['Brett & padle','Redningsvest','Intro']},
+  ridning:{cover:'🐴',title:'Ridetur langs stranda',price:'690 kr',dur:'90 minutter',desc:'Ridetur i rolig tempo langs kysten. Passer for alle nivå.',includes:['Hjelm','Guide','Bilde']},
+  havbua:{cover:'🦞',title:'Havbua Bistro',price:'$$$',dur:'Åpent 17–23',desc:'Sjømatrestaurant med spesialiteter fra Sørlandet. Reserver bord via portalen.',includes:['Bordreservasjon','Meny på 4 språk','Barn velkomne']},
+  bakeriet:{cover:'🥐',title:'Marivold Bakeri',price:'$',dur:'Åpent 07–15',desc:'Håndverksbakeri med surdeigsbrød, wienerbrød og kaffe.',includes:['Utekafé','Take-away','Bestill kake']},
+  trattoria:{cover:'🍝',title:'Trattoria Solveig',price:'$$',dur:'Åpent 16–22',desc:'Italiensk trattoria med vedfyrt pizza og hjemmelaget pasta.',includes:['Bordreservasjon','Barnemeny','Utendørs servering']},
+  kro:{cover:'🍺',title:'Kroa på hjørnet',price:'$$',dur:'Åpent 12–23',desc:'Norsk husmannskost og lokalt kraftøl. Levende musikk lørdager.',includes:['Konsertkalender','Reserver bord','Take-away']},
+  kafeen:{cover:'☕',title:'Skjærgårdskafeen',price:'$',dur:'Åpent 09–18 (sommer)',desc:'Enkel sommerkafé med kake, kaffe og vafler. Barnevennlig med lekeområde.',includes:['Sesong sommer','Barneleker','Bad ved siden av']},
+  finedining:{cover:'🍷',title:'Marivold Krone',price:'$$$$',dur:'Åpent 18–23 tor–søn',desc:'Tasting-meny 7 retter, kun med råvarer fra region. Reservasjon 2 uker i forveien.',includes:['7 retter','Vinpakke','Rullestoltilgang']},
+  fyret:{cover:'🗼',title:'Marivold fyr',price:'Gratis',dur:'Åpent hele døgnet',desc:'Fyret ble bygget i 1867 og er nå fredet. Panoramaomvisning i sommermånedene. 30 minutter tur ut fra tunet.',includes:['Fri adgang','Omvisning i sesong']},
+  kirke:{cover:'⛪',title:'Gamle stavkirke',price:'Gratis',dur:'10–15 hverdager',desc:'Trekirke fra 1200-tallet. Åpen for omvisning på hverdager. Bilder tillatt.',includes:['Omvisning','Kirkeorgel-konsert lørdager']},
+  museum:{cover:'🏛️',title:'Kystmuseet',price:'110 kr',dur:'Åpent 11–17',desc:'Historien om Marivolds sjøfart, fiske og skipsbygging.',includes:['Voksne 110','Barn gratis','Familie 250']},
+  galleri:{cover:'🎨',title:'Galleri Kai',price:'Gratis',dur:'11–18 tors–søn',desc:'Skiftende utstillinger av lokale kunstnere. Alt til salgs.',includes:['Nye utstillinger','Kaffe & saft','Vernissage siste torsdag']},
+  kyststi:{cover:'🥾',title:'Kyststien',price:'Gratis',dur:'2 timer, 7 km',desc:'Enkel merket sti langs kysten. Passer med barnevogn på deler av strekningen.',includes:['Kart tilgjengelig','Bålpanne underveis','Utsiktspunkter']},
+  holmene:{cover:'🏝️',title:'Holmene rundt',price:'Gratis',dur:'2–4 timer med kajakk',desc:'Grunne holmer og sunn – best med kajakk eller SUP.',includes:['Kart','Anbefalt rute','Turkort']},
+  varden:{cover:'⛰️',title:'Varden – toppen',price:'Gratis',dur:'2 timer opp',desc:'Krevende tur. 360° utsikt over skjærgården fra toppen.',includes:['Bratt sti','Godt fottøy','Vann anbefales']},
+  sykkeltur:{cover:'🚴',title:'Sykkeltur bygda rundt',price:'Sykkelleie 195 kr',dur:'2 timer, 15 km',desc:'Rundtur som besøker bakeriet, gården, kirken og fyret.',includes:['Sykkelleie','Kart','Pause med kaffe']},
+  badeplass:{cover:'🏖️',title:'Sandbukta',price:'Gratis',dur:'Hele døgnet',desc:'Rolig, familievennlig sandstrand med grunt vann. Toaletter og dusj.',includes:['Bading','Dusj','Kiosk sommer']},
+  sommerland:{cover:'🎢',title:'Marivold Sommerland',price:'395 kr / pers',dur:'Sesong 15/6–15/8',desc:'Klatrepark, minigolf, karuseller og lekeområde. Passer alle aldre.',includes:['Klatrepark','Minigolf','Kafé']},
+  gaard:{cover:'🐐',title:'Besøksgården',price:'85 kr',dur:'11–16 tirsdag–søndag',desc:'Møt geiter, kaniner, høner og en snill esel. Traktortur hver time.',includes:['Traktortur','Ridning ponni','Kafé']},
+  skattejakt:{cover:'🗺️',title:'Skattejakt for barn',price:'Gratis',dur:'Ta din tid',desc:'Hent gratis skattekart i resepsjonen. Finn stemplene rundt tunet og få en premie!',includes:['Kart','Stempler','Premie']},
+  brygge:{cover:'⛵',title:'Privat brygge',price:'Inkludert',dur:'Døgnet rundt',desc:'Egen brygge med plass til båt inntil 22 fot. Strøm og vann tilgjengelig.',includes:['Strømuttak','Vann','Belysning']},
+  lekeomraade:{cover:'🎡',title:'Lekeområde',price:'Inkludert',dur:'Døgnet rundt',desc:'Trampoline, husker, sandkasse og bålpanne på tunet.',includes:['Trampoline','Husker','Bålpanne']},
+  vaskeri:{cover:'🧺',title:'Fellesvaskeri',price:'Inkludert',dur:'08–22',desc:'Vaskemaskiner og tørketrommel. Rengjøringsmiddel tilgjengelig.',includes:['Vaskemaskin','Tørketrommel','Såpe']}
+};
+function openDetail(id){
+  const d = DETAILS[id]; if(!d) return;
+  const content = `
+    <div class="cover-big">${d.cover}</div>
+    <h2>${d.title}</h2>
+    <p style="color:var(--muted)">${d.dur} · <strong style="color:var(--accent)">${d.price}</strong></p>
+    <p>${d.desc}</p>
+    ${d.includes?`<h4 style="margin-top:16px">Inkluderer</h4><ul style="color:var(--muted)">${d.includes.map(i=>`<li>${i}</li>`).join('')}</ul>`:''}
+    <div style="margin-top:14px;display:flex;gap:8px;flex-wrap:wrap">
+      <button class="btn" onclick="addToCart('${d.title.replace(/'/g,'\\\'')}', ${parseInt(d.price)||0});closeModal();">Legg til på oppholdet</button>
+      <button class="btn secondary" onclick="closeModal()">Lukk</button>
+    </div>`;
+  document.getElementById('modalContent').innerHTML = content;
+  document.getElementById('modalBack').classList.add('open');
+}
+function closeModal(){ document.getElementById('modalBack').classList.remove('open'); }
+
+/* ---------- Digital key ---------- */
+function unlockDoor(btn){
+  btn.textContent = '⏳ Åpner...';
+  setTimeout(()=>{
+    btn.textContent = '✅ Åpnet – vær så god';
+    setTimeout(()=>{ btn.innerHTML = '🔓 Åpne dør'; }, 3000);
+  }, 800);
+}
+
+/* ---------- Cart ---------- */
+const cart = [];
+function addToCart(name, price){
+  cart.push({name,price});
+  renderCart();
+}
+function renderCart(){
+  const listEl = document.getElementById('cartList');
+  const totalEl = document.getElementById('cartTotal');
+  if(!listEl) return;
+  if(cart.length===0){ listEl.textContent = 'Kurven er tom.'; totalEl.innerHTML=''; }
+  else {
+    listEl.innerHTML = cart.map((it,i)=>`<div class="row-between" style="padding:8px 0;border-bottom:1px solid var(--line)"><span>${it.name}</span><span style="display:flex;gap:10px;align-items:center"><strong>${it.price} kr</strong><button class="btn ghost" onclick="removeFromCart(${i})">✕</button></span></div>`).join('');
+    const sum = cart.reduce((a,b)=>a+b.price,0);
+    totalEl.innerHTML = `<span>Sum</span><span>${sum} kr</span>`;
+  }
+  const badges = document.querySelectorAll('.cart-count');
+  badges.forEach(b=>{b.textContent = cart.length; b.classList.toggle('hidden', cart.length===0);});
+}
+function removeFromCart(i){ cart.splice(i,1); renderCart(); }
+function checkout(){
+  if(!cart.length){ alert('Handlekurven er tom.'); return; }
+  alert('Takk! ' + cart.length + ' varer er lagt til oppholdet ditt.');
+  cart.length = 0; renderCart();
+}
+
+/* ---------- Chat ---------- */
+function sendMsg(){
+  const input = document.getElementById('chatInput');
+  const txt = input.value.trim(); if(!txt) return;
+  const chat = document.getElementById('chat');
+  const t = new Date().toLocaleTimeString('nb-NO',{hour:'2-digit',minute:'2-digit'});
+  chat.insertAdjacentHTML('beforeend', `<div class="msg me">${txt}<small>Deg · ${t}</small></div>`);
+  input.value=''; chat.scrollTop = chat.scrollHeight;
+  setTimeout(()=>{
+    chat.insertAdjacentHTML('beforeend', `<div class="msg them">Tusen takk – vi fikser det umiddelbart 👍<small>Marivold · nå</small></div>`);
+    chat.scrollTop = chat.scrollHeight;
+  }, 900);
+}
+
+/* ---------- NPS / stars ---------- */
+function pickNPS(btn,n){
+  document.querySelectorAll('#nps button').forEach(b=>b.classList.remove('selected'));
+  btn.classList.add('selected');
+}
+function pickStar(n){
+  document.querySelectorAll('#stars span').forEach((s,i)=>s.classList.toggle('on', i<n));
+}
+</script>
+</body>
+</html>
