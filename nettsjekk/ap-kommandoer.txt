@@ -1,0 +1,30 @@
+# ap-kommandoer.txt — nettsjekk: kommandoer som ap-status.ps1 kjører på hver AP via plink (SSH)
+# Formål : Standard sett med LESENDE CLI-kommandoer for IQ Engine / HiveOS (Extreme/Aerohive AP-er).
+# Kjøring: Leses automatisk av ap-status.ps1 (-Kommandoer .\ap-kommandoer.txt). Én kommando per linje.
+#          Tomme linjer og linjer som starter med # ignoreres. Utdata lagres som <kommando>.txt per AP.
+# Krav   : Kommandoene MÅ være lesende (show ...). Skriptet kjører aldri kommandoer som endrer konfigurasjon,
+#          og et sikkerhetsfilter stopper linjer som inneholder config, reset, reboot, save, write, erase,
+#          clear, delete, «no » eller «set » (kan bare overstyres bevisst med -TillatEndringer).
+#          Merk: «show running-config» inneholder ordet config og stoppes derfor av filteret — kjør den
+#          manuelt med plink ved behov.
+#          Ukjente kommandoer er ufarlige: AP-en svarer bare med en feilmelding som lagres i rapporten.
+#          Eldre HiveOS-versjoner kan bruke «show log buffered» i stedet for «show logging buffered» —
+#          sjekk med «show ?» / «show log ?» i CLI-et på AP-en og juster listen.
+# Versjon 1.0 — 2026-09-09
+# Endrer ingenting — kun lesing og målinger.
+show version
+show capwap client
+show interface
+show interface mgt0
+show interface eth0
+show interface wifi0
+show interface wifi1
+show acsp
+show acsp neighbor
+show station
+show roaming cache
+show ip route
+show lldp neighbor
+show cpu
+show memory
+show logging buffered

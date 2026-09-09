@@ -1,0 +1,15 @@
+# ap-liste.eksempel.txt — nettsjekk: eksempel på AP-liste for ap-status.ps1
+# Formål : Liste over Extreme/Aerohive-AP-er (ExtremeCloudIQ) som ap-status.ps1 skal hente status fra.
+# Kjøring: Kopier denne filen til ap-liste.txt (samme mappe som ap-status.ps1) og rediger navn og IP-adresser.
+#          ap-liste.txt er unntatt fra git (.gitignore) slik at ekte adresser ikke havner i repoet.
+# Krav   : Én AP per linje på formen  navn;ip  (IP-adresse eller DNS-navn). Linjer som starter med # og tomme
+#          linjer ignoreres. Navnet brukes som mappenavn i rapporten (ugyldige filtegn byttes ut med _).
+# Versjon 1.0 — 2026-09-09
+# Endrer ingenting — kun lesing og målinger.
+#
+# Adressene under er kun eksempler (RFC 1918). Bytt dem ut med AP-enes faktiske adresser på Adm-nett
+# (se «Devices» i ExtremeCloudIQ eller DHCP-leaselisten i brannmuren).
+AP305C-resepsjon;192.168.10.11
+AP305CX-servicebygg;192.168.10.12
+AP460C-uteomraade;192.168.10.13
+Atom-AP30-kiosk;192.168.10.14
