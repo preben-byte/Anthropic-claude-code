@@ -4,3 +4,6 @@ roaming-logg-*
 ap-status-*/
 # Din egen AP-liste med ekte IP-adresser (bruk ap-liste.eksempel.txt som mal)
 ap-liste.txt
+# Rapporter fra xiq-sjekk.py
+xiq-rapport-*
+__pycache__/
